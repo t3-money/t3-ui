@@ -678,8 +678,8 @@ export function isValidToken(chainId: number, address: string) {
 }
 
 export function getToken(chainId: number, address: string) {
-  console.log("chain ID", chainId);
-  console.log("token add:", address);
+  console.log("chain ID", chainId); // eslint-disable-line no-console
+  console.log("token add:", address); // eslint-disable-line no-console
   if (!TOKENS_MAP[chainId]) {
     throw new Error(`Incorrect chainId ${chainId}`);
   }
