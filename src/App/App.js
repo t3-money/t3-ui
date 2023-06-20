@@ -100,6 +100,7 @@ import { useChainId } from "lib/chains";
 import ExternalLink from "components/ExternalLink/ExternalLink";
 import { isDevelopment } from "config/env";
 import Button from "components/Button/Button";
+import ApproveTokens from "components/ApproveTokens/ApproveTokens";
 
 if (window?.ethereum?.autoRefreshOnNetworkChange) {
   window.ethereum.autoRefreshOnNetworkChange = false;
@@ -200,6 +201,11 @@ function FullApp() {
     getWalletConnectHandler(activate, deactivate, setActivatingConnector)();
   };
 
+  const handleApproveTokens = () => {
+    setApprovalsModalVisible(true);
+    setWalletModalVisible(false);
+  };
+
   const userOnMobileDevice = "navigator" in window && isMobileDevice(window.navigator);
 
   const activateMetaMask = () => {
@@ -262,6 +268,7 @@ function FullApp() {
   const [shouldHideRedirectModal, setShouldHideRedirectModal] = useState(false);
   const [redirectPopupTimestamp, setRedirectPopupTimestamp] = useLocalStorage(REDIRECT_POPUP_TIMESTAMP_KEY);
   const [selectedToPage, setSelectedToPage] = useState("");
+  const [approvalsModalVisible, setApprovalsModalVisible] = useState(false);
   const connectWallet = () => setWalletModalVisible(true);
 
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
@@ -577,6 +584,7 @@ function FullApp() {
         setIsVisible={setWalletModalVisible}
         label={t`Connect Wallet`}
       >
+        {/* @todo Connect Wallet Modal */}
         <button className="Wallet-btn MetaMask-btn" onClick={activateMetaMask}>
           <img src={metamaskImg} alt="MetaMask" />
           <div>
@@ -595,6 +603,19 @@ function FullApp() {
             <Trans>WalletConnect</Trans>
           </div>
         </button>
+        <button className="Wallet-btn-approve" onClick={handleApproveTokens}>
+          <div>
+            <Trans>{`Approve Tokens`}</Trans>
+          </div>
+        </button>
+      </Modal>
+      <Modal
+        className="Approve-tokens-modal"
+        isVisible={approvalsModalVisible}
+        setIsVisible={setApprovalsModalVisible}
+        label={`Approve Tokens`}
+      >
+        <ApproveTokens chainId={chainId} />
       </Modal>
       <Modal
         className="App-settings"
