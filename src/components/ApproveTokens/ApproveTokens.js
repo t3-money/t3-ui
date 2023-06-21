@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import cx from "classnames";
 import "./ApproveTokens.css";
 import { Trans } from "@lingui/macro";
-import { getTokens, getWhitelistedTokens } from "config/tokens";
+import { getTokens } from "config/tokens";
 import { useWeb3React } from "@web3-react/core";
 import useSWR from "swr";
 import { getContract } from "config/contracts";
