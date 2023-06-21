@@ -1,5 +1,40 @@
 .Approve-tokens-modal-body {
-    width: 60vw; /* 60% of viewport width */
-    height: 40vh; /* 40% of viewport height */
-    /* other styles as needed... */
-  }
+  width: 60vw; /* 60% of viewport width */
+  height: 40vh; /* 40% of viewport height */
+  /* other styles as needed... */
+}
+
+.Approve-tokens-input-section {
+  min-height: 9.2rem;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 1rem; /* Set the size of the top margin */
+  margin-bottom: 1rem; /* Set the size of the bottom margin */
+  background-color: rgba(0, 0, 0, 0.2); /* Set the background color to black with 20% opacity */
+  padding: 1rem;
+}
+
+.Approve-tokens-section-top {
+  padding-bottom: 0;
+}
+
+.Approve-tokens-section-bottom {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding-bottom: 0.31rem;
+}
+
+.code {
+  display: inline-block;
+  font-family: "Courier New", monospace;
+  background-color: #f0f0f0;
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 100%;
+  border-radius: 6px;
+  font-weight: bold;
+  font-colour: #eb5756;
+  background-color: #a08e86;
+}

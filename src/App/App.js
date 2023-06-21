@@ -603,11 +603,13 @@ function FullApp() {
             <Trans>WalletConnect</Trans>
           </div>
         </button>
-        <button className="Wallet-btn-approve" onClick={handleApproveTokens}>
-          <div>
-            <Trans>{`Approve Tokens`}</Trans>
-          </div>
-        </button>
+        {active && (
+          <button className="Wallet-btn-approve" onClick={handleApproveTokens}>
+            <div>
+              <Trans>{`Approve Tokens`}</Trans>
+            </div>
+          </button>
+        )}
       </Modal>
       <Modal
         className="Approve-tokens-modal"
