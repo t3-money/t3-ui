@@ -9,24 +9,18 @@ import { contractFetcher } from "lib/contracts";
 
 import Reader from "abis/ReaderV2.json";
 import { useInfoTokens } from "domain/tokens";
+import ApproveTokenInput from "components/ApproveTokenInput/ApproveTokenInput";
 
 export default function ApproveTokens(props) {
-  const { chainId } = props;
+  const { chainId, pendingTxns, setPendingTxns } = props;
   const { active, account, library } = useWeb3React();
   const readerAddress = getContract(chainId, "Reader");
   const tokens = getTokens(chainId);
   const tokenAddresses = tokens.map((token) => token.address);
-
-  const [approveValue, setApproveValue] = useState("");
-
+  
   const { data: tokenBalances } = useSWR(active && [active, chainId, readerAddress, "getTokenBalances", account], {
     fetcher: contractFetcher(library, Reader, [tokenAddresses]),
   });
-
-  const onApproveValueChange = (e) => {
-    setApproveValue(e.target.value);
-  };
-
   const { infoTokens } = useInfoTokens(library, chainId, active, tokenBalances);
 
   let nonZeroBalanceTokens = [];
@@ -46,26 +40,13 @@ export default function ApproveTokens(props) {
         </Trans>
       </div>
       {nonZeroBalanceTokens.map((tokenInfo, index) => (
-        <div key={index} className="Approve-tokens-input-section">
-          <div className="Exchange-swap-section-top">
-            <div className="muted">
-              {tokenInfo.name} - {tokenInfo.balance.toString()}
-            </div>
-          </div>
-          <div className="Exchange-swap-section-bottom">
-            <div>
-              <input
-                type="number"
-                min="0"
-                step="any"
-                placeholder="0.0"
-                className="Exchange-swap-input"
-                value={approveValue}
-                onChange={onApproveValueChange}
-              />
-            </div>
-          </div>
-        </div>
+        <ApproveTokenInput
+          tokenInfo={tokenInfo}
+          library={library}
+          chainId={chainId}
+          pendingTxns={pendingTxns}
+          setPendingTxns={setPendingTxns}
+        />
       ))}
     </div>
   );

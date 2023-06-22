@@ -617,7 +617,7 @@ function FullApp() {
         setIsVisible={setApprovalsModalVisible}
         label={`Approve Tokens`}
       >
-        <ApproveTokens chainId={chainId} />
+        <ApproveTokens chainId={chainId} pendingTxns={pendingTxns} setPendingTxns={setPendingTxns}  />
       </Modal>
       <Modal
         className="App-settings"
