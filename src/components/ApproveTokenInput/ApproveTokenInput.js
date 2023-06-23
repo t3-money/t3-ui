@@ -5,11 +5,13 @@ import { formatAmount } from "lib/numbers";
 import { approveTokens } from "domain/tokens";
 import { getContract } from "config/contracts";
 import { getTokenInfo } from "domain/tokens/utils";
+import Button from "components/Button/Button";
 
 export default function ApproveTokenInput(props) {
   const { tokenInfo, library, chainId, infoTokens, pendingTxns, setPendingTxns } = props;
   const [approveValue, setApproveValue] = useState("");
   const [isApproving, setIsApproving] = useState(false);
+  const [isApproved, setIsApproved] = useState(false); // New state variable to check if the approve process has completed
   const routerAddress = getContract(chainId, "Router");
 
   const onApproveValueChange = (e) => {
@@ -24,20 +26,27 @@ export default function ApproveTokenInput(props) {
   };
 
   function approveToken() {
-    approveTokens({
-      setIsApproving,
-      library,
-      tokenAddress: tokenInfo.address,
-      spender: routerAddress,
-      chainId: chainId,
-      onApproveSubmitted: () => {
-        setIsApproving(false);
-      },
-      infoTokens,
-      getTokenInfo,
-      pendingTxns,
-      setPendingTxns,
-    });
+    try {
+      approveTokens({
+        setIsApproving,
+        library,
+        tokenAddress: tokenInfo.address,
+        spender: routerAddress,
+        chainId: chainId,
+        onApproveSubmitted: () => {
+          setIsApproving(false);
+          setIsApproved(true);
+        },
+        infoTokens,
+        getTokenInfo,
+        pendingTxns,
+        setPendingTxns,
+      });
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.warn(error);
+    }
+
     return;
   }
 
@@ -76,9 +85,14 @@ export default function ApproveTokenInput(props) {
           </div>
         </div>
       </div>
-      <button onClick={onApproveClick} className="Approve-token-input-approve">
-        Approve
-      </button>
+      <Button
+        variant={isApproved ? "approved" : "primary-action"}
+        className="w-20 h-full"
+        onClick={onApproveClick}
+        disabled={parseFloat(approveValue) === "0" || isApproving}
+      >
+        {isApproved ? "Approved!" : "Approve"}
+      </Button>
     </div>
   );
 }

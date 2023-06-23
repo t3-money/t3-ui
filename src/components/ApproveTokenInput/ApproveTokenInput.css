@@ -37,6 +37,8 @@
 .Approve-tokens-input-section-wrapper {
   display: flex;
   align-items: center;
-  
-  /* justify-content: space-between; */
+}
+
+.Approve-tokens-input-section-wrapper > * + * {
+  margin-left: 2.5rem; /* equivalent to Tailwind's 10 spacing unit */
 }

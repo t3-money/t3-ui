@@ -10,14 +10,16 @@ import { contractFetcher } from "lib/contracts";
 import Reader from "abis/ReaderV2.json";
 import { useInfoTokens } from "domain/tokens";
 import ApproveTokenInput from "components/ApproveTokenInput/ApproveTokenInput";
+import Button from "components/Button/Button";
+import { SHOULD_SHOW_APPROVE_TOKENS_MODAL } from "config/localStorage";
 
 export default function ApproveTokens(props) {
-  const { chainId, pendingTxns, setPendingTxns } = props;
+  const { chainId, pendingTxns, setPendingTxns, closeApprovalsModal } = props;
   const { active, account, library } = useWeb3React();
   const readerAddress = getContract(chainId, "Reader");
   const tokens = getTokens(chainId);
   const tokenAddresses = tokens.map((token) => token.address);
-  
+
   const { data: tokenBalances } = useSWR(active && [active, chainId, readerAddress, "getTokenBalances", account], {
     fetcher: contractFetcher(library, Reader, [tokenAddresses]),
   });
@@ -31,6 +33,8 @@ export default function ApproveTokens(props) {
     }
   }
 
+  const [checked, setChecked] = useState(false);
+
   return (
     <div className="Approve-tokens-modal-body">
       <div className="Page-description">
@@ -41,6 +45,7 @@ export default function ApproveTokens(props) {
       </div>
       {nonZeroBalanceTokens.map((tokenInfo, index) => (
         <ApproveTokenInput
+          key={index}
           tokenInfo={tokenInfo}
           library={library}
           chainId={chainId}
@@ -48,6 +53,20 @@ export default function ApproveTokens(props) {
           setPendingTxns={setPendingTxns}
         />
       ))}
+      <Button variant="primary-action" className="w-20 h-full" onClick={closeApprovalsModal}>
+        {`Done`}
+      </Button>
+      <div className="checkbox-container">
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={() => {
+            setChecked(!checked);
+            localStorage.setItem(SHOULD_SHOW_APPROVE_TOKENS_MODAL, true);
+          }}
+        />
+        <span classname="checkbox-text">Don't show me this again</span>
+      </div>
     </div>
   );
 }
