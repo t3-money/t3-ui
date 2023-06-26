@@ -299,6 +299,9 @@ function FullApp() {
     connectInjectedWallet();
 
     if (localStorage.getItem(SHOULD_SHOW_APPROVE_TOKENS_MODAL) !== null) {
+      if (JSON.parse(localStorage.getItem(SHOULD_SHOW_APPROVE_TOKENS_MODAL)) === false) {
+        setWalletModalVisible(false);
+      }
       setApprovalsButton(JSON.parse(localStorage.getItem(SHOULD_SHOW_APPROVE_TOKENS_MODAL)));
     }
   };
