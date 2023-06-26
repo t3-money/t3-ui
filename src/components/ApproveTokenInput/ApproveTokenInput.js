@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import "./ApproveTokenInput.css";
 import { ethers } from "ethers";
 import { formatAmount } from "lib/numbers";
@@ -20,10 +20,6 @@ export default function ApproveTokenInput(props) {
   const routerAddress = getContract(chainId, "Router");
   const { AddressZero } = ethers.constants;
   const { active, account } = useWeb3React();
-
-  useEffect(() => {
-    console.log("Token allowance changed:", tokenAllowance);
-  }, [tokenAllowance]);
 
   const onApproveValueChange = (e) => {
     const inputValue = e.target.value;
@@ -67,7 +63,6 @@ export default function ApproveTokenInput(props) {
     const tokenBalanceInEther = ethers.utils.formatEther(tokenInfo.balance);
     const allowanceInEther = ethers.utils.formatEther(tokenAllowance);
     const maxApproveValue = parseFloat(tokenBalanceInEther) - parseFloat(allowanceInEther);
-    console.log({ tokenBalanceInEther, allowanceInEther, maxApproveValue });
     setApproveValue(maxApproveValue.toString());
   };
 
