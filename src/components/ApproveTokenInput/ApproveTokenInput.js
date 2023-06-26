@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ApproveTokenInput.css";
 import { ethers } from "ethers";
 import { formatAmount } from "lib/numbers";
@@ -6,19 +6,32 @@ import { approveTokens } from "domain/tokens";
 import { getContract } from "config/contracts";
 import { getTokenInfo } from "domain/tokens/utils";
 import Button from "components/Button/Button";
+import useSWR from "swr";
+import { useWeb3React } from "@web3-react/core";
+import { contractFetcher } from "lib/contracts";
+import Token from "abis/Token.json";
 
 export default function ApproveTokenInput(props) {
   const { tokenInfo, library, chainId, infoTokens, pendingTxns, setPendingTxns } = props;
   const [approveValue, setApproveValue] = useState("");
   const [isApproving, setIsApproving] = useState(false);
-  const [isApproved, setIsApproved] = useState(false); // New state variable to check if the approve process has completed
+  const [isApproved, setIsApproved] = useState(false);
+  const [tokenAllowance, setTokenAllowance] = useState(ethers.BigNumber.from(0));
   const routerAddress = getContract(chainId, "Router");
+  const { AddressZero } = ethers.constants;
+  const { active, account } = useWeb3React();
+
+  useEffect(() => {
+    console.log("Token allowance changed:", tokenAllowance);
+  }, [tokenAllowance]);
 
   const onApproveValueChange = (e) => {
     const inputValue = e.target.value;
     if (!isNaN(inputValue) && inputValue.trim() !== "") {
       const inputValueInWei = ethers.utils.parseEther(inputValue);
-      if (inputValueInWei.gt(tokenInfo.balance)) {
+      const remainingBalance = tokenInfo.balance.sub(tokenAllowance);
+
+      if (inputValueInWei.gt(remainingBalance)) {
         return;
       }
     }
@@ -52,12 +65,22 @@ export default function ApproveTokenInput(props) {
 
   const onMaxClick = () => {
     const tokenBalanceInEther = ethers.utils.formatEther(tokenInfo.balance);
-    setApproveValue(tokenBalanceInEther);
+    const allowanceInEther = ethers.utils.formatEther(tokenAllowance);
+    const maxApproveValue = parseFloat(tokenBalanceInEther) - parseFloat(allowanceInEther);
+    console.log({ tokenBalanceInEther, allowanceInEther, maxApproveValue });
+    setApproveValue(maxApproveValue.toString());
   };
 
+  const needApproval = tokenInfo.address !== AddressZero && tokenAllowance && tokenAllowance.lt(tokenInfo.balance);
+
   const onApproveClick = () => {
-    approveToken();
+    return needApproval ? approveToken() : null;
   };
+
+  useSWR(active && [active, chainId, tokenInfo.address, "allowance", account, routerAddress], {
+    fetcher: contractFetcher(library, Token),
+    onSuccess: (data) => setTokenAllowance(data),
+  });
 
   return (
     <div className="Approve-tokens-input-section-wrapper">
