@@ -62,7 +62,7 @@ export default function ApproveTokens(props) {
           checked={checked}
           onChange={() => {
             setChecked(!checked);
-            localStorage.setItem(SHOULD_SHOW_APPROVE_TOKENS_MODAL, true);
+            localStorage.setItem(SHOULD_SHOW_APPROVE_TOKENS_MODAL, checked);
           }}
         />
         <span classname="checkbox-text">Don't show me this again</span>

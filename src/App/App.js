@@ -62,7 +62,7 @@ import ReferralTerms from "pages/ReferralTerms/ReferralTerms";
 import TermsAndConditions from "pages/TermsAndConditions/TermsAndConditions";
 import { useLocalStorage } from "react-use";
 import { RedirectPopupModal } from "components/ModalViews/RedirectModal";
-import { REDIRECT_POPUP_TIMESTAMP_KEY } from "config/localStorage";
+import { REDIRECT_POPUP_TIMESTAMP_KEY, SHOULD_SHOW_APPROVE_TOKENS_MODAL } from "config/localStorage";
 import Jobs from "pages/Jobs/Jobs";
 
 import { i18n } from "@lingui/core";
@@ -256,19 +256,13 @@ function FullApp() {
     attemptActivateWallet("CoinBase");
   };
 
-  const attemptActivateWallet = (providerName) => {
-    localStorage.setItem(SHOULD_EAGER_CONNECT_LOCALSTORAGE_KEY, true);
-    localStorage.setItem(CURRENT_PROVIDER_LOCALSTORAGE_KEY, providerName);
-    activateInjectedProvider(providerName);
-    connectInjectedWallet();
-  };
-
   const [walletModalVisible, setWalletModalVisible] = useState(false);
   const [redirectModalVisible, setRedirectModalVisible] = useState(false);
   const [shouldHideRedirectModal, setShouldHideRedirectModal] = useState(false);
   const [redirectPopupTimestamp, setRedirectPopupTimestamp] = useLocalStorage(REDIRECT_POPUP_TIMESTAMP_KEY);
   const [selectedToPage, setSelectedToPage] = useState("");
   const [approvalsModalVisible, setApprovalsModalVisible] = useState(false);
+  const [approvalsButton, setApprovalsButton] = useState(true);
   const connectWallet = () => setWalletModalVisible(true);
 
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
@@ -297,6 +291,17 @@ function FullApp() {
     [chainId, SHOULD_SHOW_POSITION_LINES_KEY],
     false
   );
+
+  const attemptActivateWallet = (providerName) => {
+    localStorage.setItem(SHOULD_EAGER_CONNECT_LOCALSTORAGE_KEY, true);
+    localStorage.setItem(CURRENT_PROVIDER_LOCALSTORAGE_KEY, providerName);
+    activateInjectedProvider(providerName);
+    connectInjectedWallet();
+
+    if (localStorage.getItem(SHOULD_SHOW_APPROVE_TOKENS_MODAL) !== null) {
+      setApprovalsButton(JSON.parse(localStorage.getItem(SHOULD_SHOW_APPROVE_TOKENS_MODAL)));
+    }
+  };
 
   const openSettings = () => {
     const slippage = parseInt(savedSlippageAmount);
@@ -584,7 +589,6 @@ function FullApp() {
         setIsVisible={setWalletModalVisible}
         label={t`Connect Wallet`}
       >
-        {/* @todo Connect Wallet Modal */}
         <button className="Wallet-btn MetaMask-btn" onClick={activateMetaMask}>
           <img src={metamaskImg} alt="MetaMask" />
           <div>
@@ -603,7 +607,7 @@ function FullApp() {
             <Trans>WalletConnect</Trans>
           </div>
         </button>
-        {active && (
+        {active && approvalsButton === true && (
           <button className="Wallet-btn-approve" onClick={handleApproveTokens}>
             <div>
               <Trans>{`Approve Tokens`}</Trans>
