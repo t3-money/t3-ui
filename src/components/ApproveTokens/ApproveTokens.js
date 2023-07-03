@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ApproveTokens.css";
 import { Trans } from "@lingui/macro";
 import { getTokens } from "config/tokens";
@@ -11,7 +11,6 @@ import Reader from "abis/ReaderV2.json";
 import { useInfoTokens } from "domain/tokens";
 import ApproveTokenInput from "components/ApproveTokenInput/ApproveTokenInput";
 import Button from "components/Button/Button";
-import { SHOULD_SHOW_APPROVE_TOKENS_MODAL } from "config/localStorage";
 
 export default function ApproveTokens(props) {
   const { chainId, pendingTxns, setPendingTxns, closeApprovalsModal } = props;
@@ -32,8 +31,6 @@ export default function ApproveTokens(props) {
       nonZeroBalanceTokens.push(tokenInfo);
     }
   }
-
-  const [checked, setChecked] = useState(false);
 
   return (
     <div className="Approve-tokens-modal-body">
@@ -56,17 +53,6 @@ export default function ApproveTokens(props) {
       <Button variant="primary-action" className="w-20 h-full" onClick={closeApprovalsModal}>
         {`Done`}
       </Button>
-      <div className="checkbox-container">
-        <input
-          type="checkbox"
-          checked={checked}
-          onChange={() => {
-            setChecked(!checked);
-            localStorage.setItem(SHOULD_SHOW_APPROVE_TOKENS_MODAL, checked);
-          }}
-        />
-        <span classname="checkbox-text">Don't show me this again</span>
-      </div>
     </div>
   );
 }

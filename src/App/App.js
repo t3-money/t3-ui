@@ -62,7 +62,7 @@ import ReferralTerms from "pages/ReferralTerms/ReferralTerms";
 import TermsAndConditions from "pages/TermsAndConditions/TermsAndConditions";
 import { useLocalStorage } from "react-use";
 import { RedirectPopupModal } from "components/ModalViews/RedirectModal";
-import { REDIRECT_POPUP_TIMESTAMP_KEY, SHOULD_SHOW_APPROVE_TOKENS_MODAL } from "config/localStorage";
+import { REDIRECT_POPUP_TIMESTAMP_KEY } from "config/localStorage";
 import Jobs from "pages/Jobs/Jobs";
 
 import { i18n } from "@lingui/core";
@@ -297,13 +297,6 @@ function FullApp() {
     localStorage.setItem(CURRENT_PROVIDER_LOCALSTORAGE_KEY, providerName);
     activateInjectedProvider(providerName);
     connectInjectedWallet();
-
-    if (localStorage.getItem(SHOULD_SHOW_APPROVE_TOKENS_MODAL) !== null) {
-      if (JSON.parse(localStorage.getItem(SHOULD_SHOW_APPROVE_TOKENS_MODAL)) === false) {
-        setWalletModalVisible(false);
-      }
-      setApprovalsButton(JSON.parse(localStorage.getItem(SHOULD_SHOW_APPROVE_TOKENS_MODAL)));
-    }
   };
 
   const openSettings = () => {
