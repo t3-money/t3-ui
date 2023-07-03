@@ -14,7 +14,8 @@ export default function ApproveTokens(props) {
       <div className="Page-description">
         <Trans>
           Please approve the tokens present in your wallet to the necessary contracts to avoid repeated approval
-          transactions. The tokens are being approved to the <span className="code">Router</span> contract.
+          transactions. The tokens are being approved to the Router contract. Pre-approving assets leads to a faster
+          trading experience!
         </Trans>
       </div>
       {nonZeroBalanceTokens.map((tokenInfo, index) => (
