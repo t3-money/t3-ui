@@ -17,6 +17,7 @@ import {
 } from "lib/legacy";
 
 import Home from "pages/Home/Home";
+import AppHome from "pages/AppHome/AppHome";
 import Dashboard from "pages/Dashboard/Dashboard";
 import Stats from "pages/Stats/Stats";
 import Ecosystem from "pages/Ecosystem/Ecosystem";
@@ -479,7 +480,7 @@ function FullApp() {
           {!isHome && (
             <Switch>
               <Route exact path="/">
-                <Redirect to="/dashboard" />
+                <AppHome showRedirectModal={showRedirectModal} redirectPopupTimestamp={redirectPopupTimestamp} />
               </Route>
               <Route exact path="/trade">
                 <Exchange
@@ -495,9 +496,6 @@ function FullApp() {
                   connectWallet={connectWallet}
                   savedShouldDisableValidationForTesting={savedShouldDisableValidationForTesting}
                 />
-              </Route>
-              <Route exact path="/dashboard">
-                <Dashboard />
               </Route>
               <Route exact path="/stats">
                 <Stats />

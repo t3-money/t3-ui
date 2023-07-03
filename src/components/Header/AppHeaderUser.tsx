@@ -151,17 +151,6 @@ export function AppHeaderUser({
         </div>
       )}
 
-      <div className="App-header-trade-link">
-        <HeaderLink
-          className="default-btn"
-          to="/trade"
-          redirectPopupTimestamp={redirectPopupTimestamp}
-          showRedirectModal={showRedirectModal}
-        >
-          <Trans>Trade</Trans>
-        </HeaderLink>
-      </div>
-
       {showConnectionOptions ? (
         <>
           <div className="App-header-user-address">
