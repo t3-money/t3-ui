@@ -12,11 +12,13 @@ export default function ApproveTokens(props) {
   return (
     <div className="Approve-tokens-modal-body">
       <div className="Page-description">
-        <Trans>
-          Please approve the tokens present in your wallet to the necessary contracts to avoid repeated approval
-          transactions. The tokens are being approved to the Router contract. Pre-approving assets leads to a faster
-          trading experience!
-        </Trans>
+        <div className="Page-description">
+          <Trans>
+            Please approve the tokens present in your wallet to the necessary contracts to avoid repeated approval
+            transactions. The tokens are being approved to the Router contract. <br /> <br />
+            Pre-approving assets leads to a faster trading experience!
+          </Trans>
+        </div>
       </div>
       {nonZeroBalanceTokens.map((tokenInfo, index) => (
         <ApproveTokenInput
