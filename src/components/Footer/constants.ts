@@ -4,7 +4,6 @@ import twitterIcon from "img/ic_twitter.svg";
 import discordIcon from "img/ic_discord.svg";
 import telegramIcon from "img/ic_telegram.svg";
 import githubIcon from "img/ic_github.svg";
-import substackIcon from "img/ic_substack.svg";
 import { MessageDescriptor } from "@lingui/core";
 
 type Link = {
