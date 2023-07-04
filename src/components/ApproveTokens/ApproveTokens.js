@@ -14,9 +14,10 @@ export default function ApproveTokens(props) {
       <div className="Page-description">
         <div className="Page-description">
           <Trans>
-            Please approve the tokens present in your wallet to the necessary contracts to avoid repeated approval
-            transactions. The tokens are being approved to the Router contract. <br /> <br />
-            Pre-approving assets leads to a faster trading experience!
+            To ensure a smoother trading experience, we kindly request you to authorize the tokens in your wallet for
+            the required contracts. By doing so, you can avoid multiple approval transactions. The tokens will be
+            approved for the Router contract. <br /> <br />
+            By pre-approving your assets, you can enjoy a quicker and more efficient trading experience.
           </Trans>
         </div>
       </div>

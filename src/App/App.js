@@ -633,7 +633,7 @@ function FullApp() {
             <Trans>WalletConnect</Trans>
           </div>
         </button>
-        {active === true && hasTokens === true && (
+        {active && hasTokens && (
           <button className="Wallet-btn-approve" onClick={handleApproveTokens}>
             <div>
               <Trans>{`Approve Tokens`}</Trans>
