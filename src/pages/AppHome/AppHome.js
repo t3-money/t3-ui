@@ -31,9 +31,6 @@ export default function AppHome({ showRedirectModal, redirectPopupTimestamp }) {
             <br />
             Digital asset exchange
           </div>
-          {/* <a href="https://example.com/" className="btn">
-          Go ahead...
-        </a> */}
           <TradeNowButton />
         </div>
         <Footer showRedirectModal={showRedirectModal} redirectPopupTimestamp={redirectPopupTimestamp} />
