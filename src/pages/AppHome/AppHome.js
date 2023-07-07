@@ -15,7 +15,7 @@ export default function AppHome({ showRedirectModal, redirectPopupTimestamp }) {
         showRedirectModal={showRedirectModal}
       >
         <Trans>Trade Now</Trans>
-        <img className="logo" src={arrow} alt="arrow" />
+        <img className="arrow" src={arrow} alt="arrow" />
       </HeaderLink>
     );
   };
@@ -33,7 +33,7 @@ export default function AppHome({ showRedirectModal, redirectPopupTimestamp }) {
           </div>
           <TradeNowButton />
         </div>
-        <Footer showRedirectModal={showRedirectModal} redirectPopupTimestamp={redirectPopupTimestamp} />
+        <Footer />
       </div>
     </div>
   );

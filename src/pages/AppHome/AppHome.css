@@ -1,5 +1,5 @@
 .hero-outer {
-  background-image: url(img/t3.jpg);
+  background-image: url(img/t3.png);
 }
 .hero {
   /* Sizing */
@@ -38,7 +38,7 @@
 .Home-title-subtext {
   color: #14f187;
 }
-.logo {
+.arrow {
   height: 2.8rem;
   width: 2.8rem;
   margin-left: 0.5rem;
