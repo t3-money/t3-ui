@@ -404,12 +404,10 @@ export const SwapBox = forwardRef((props, ref) => {
         to: getTokenBySymbol(chainId, defaultCollateralSymbol).address,
       },
       [LONG]: {
-        //D
         from: AddressZero,
         to: AddressZero,
       },
       [SHORT]: {
-        //D
         from: getTokenBySymbol(chainId, defaultCollateralSymbol).address,
         to: AddressZero,
       },
@@ -924,13 +922,9 @@ export const SwapBox = forwardRef((props, ref) => {
   };
 
   return (
-    <div className="Exchange page-layout">
+    <div className="Exchange Exchangeswap page-layout">
       {showBanner && <ExchangeBanner hideBanner={hideBanner} />}
       <div className="Exchange-content">
-        <div className="Exchange-left">
-          {renderChart()}
-          <div className="Exchange-lists large">{getListSection()}</div>
-        </div>
         <div className="Exchange-right">
           <SwapTab
             pendingPositions={pendingPositions}
@@ -987,6 +981,9 @@ export const SwapBox = forwardRef((props, ref) => {
         </div>
         <div className="Exchange-lists small">{getListSection()}</div>
         <UsefulLinks className="Useful-links-exchange" />
+      </div>
+      <div className="Exchange-left">
+        <div className="">{getListSection()}</div>
       </div>
       <Footer />
     </div>

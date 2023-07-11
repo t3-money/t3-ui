@@ -5,7 +5,7 @@ import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 import useScrollToTop from "lib/useScrollToTop";
 
-import { Switch, Route, HashRouter as Router, useLocation, useHistory } from "react-router-dom";
+import { Switch, Route, HashRouter as Router, useLocation, useHistory, Redirect } from "react-router-dom";
 
 import {
   DEFAULT_SLIPPAGE_AMOUNT,
@@ -18,6 +18,7 @@ import {
 
 import Home from "pages/Home/Home";
 import AppHome from "pages/AppHome/AppHome";
+import Dashboard from "pages/Dashboard/Dashboard";
 import Stats from "pages/Stats/Stats";
 import Ecosystem from "pages/Ecosystem/Ecosystem";
 import Stake from "pages/Stake/Stake";
@@ -519,6 +520,9 @@ function FullApp() {
                   connectWallet={connectWallet}
                   savedShouldDisableValidationForTesting={savedShouldDisableValidationForTesting}
                 />
+              </Route>
+              <Route exact path="/dashboard">
+                <Dashboard />
               </Route>
               <Route exact path="/stats">
                 <Stats />

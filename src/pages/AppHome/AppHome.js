@@ -4,6 +4,8 @@ import "./AppHome.css";
 import { Trans } from "@lingui/macro";
 import { HeaderLink } from "components/Header/HeaderLink";
 import arrow from "img/arrow-narrow-right.svg";
+import mobilet3 from "img/mobile-t3.png";
+import t3 from "img/Artwork_t3.svg";
 
 export default function AppHome({ showRedirectModal, redirectPopupTimestamp }) {
   const TradeNowButton = () => {
@@ -21,7 +23,7 @@ export default function AppHome({ showRedirectModal, redirectPopupTimestamp }) {
   };
 
   return (
-    <div className="hero-outer">
+    <div class="main">
       <div className="hero">
         <div className="hero-inner">
           <div className="hero-title">
@@ -33,8 +35,23 @@ export default function AppHome({ showRedirectModal, redirectPopupTimestamp }) {
           </div>
           <TradeNowButton />
         </div>
-        <Footer />
       </div>
+      <div class="mobile">
+        <div class="text">
+          <p>
+            <Trans>User-friendly</Trans>
+            <br />
+            <span className="subtext">Compliant</span>
+            <br />
+            Digital asset exchange
+          </p>
+        </div>
+        <TradeNowButton />
+        <div class="image">
+          <img src={mobilet3} alt="" />
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }

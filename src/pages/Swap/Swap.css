@@ -1,7 +1,11 @@
 .Exchange {
   max-width: 155rem;
   margin: auto;
-  justify-content: space-between;
+}
+
+.Exchangeswap {
+  justify-content: center;
+  align-items: center;
 }
 
 .Exchange-trigger-order-info,
