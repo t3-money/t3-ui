@@ -5,7 +5,7 @@ import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 import useScrollToTop from "lib/useScrollToTop";
 
-import { Switch, Route, HashRouter as Router, useLocation, useHistory, Redirect } from "react-router-dom";
+import { Switch, Route, HashRouter as Router, useLocation, useHistory } from "react-router-dom";
 
 import {
   DEFAULT_SLIPPAGE_AMOUNT,

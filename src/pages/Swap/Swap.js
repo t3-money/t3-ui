@@ -33,7 +33,7 @@ import Token from "abis/Token.json";
 
 import Checkbox from "components/Checkbox/Checkbox";
 import SwapTab from "components/Exchange/SwapTab";
-import ExchangeTVChart, { getChartToken } from "components/Exchange/ExchangeTVChart";
+import { getChartToken } from "components/Exchange/ExchangeTVChart";
 import PositionsList from "components/Exchange/PositionsList";
 import OrdersList from "components/Exchange/OrdersList";
 import TradeHistory from "components/Exchange/TradeHistory";
@@ -903,22 +903,6 @@ export const SwapBox = forwardRef((props, ref) => {
 
   const onSelectWalletToken = (token) => {
     setFromTokenAddress(swapOption, token.address);
-  };
-
-  const renderChart = () => {
-    return (
-      <ExchangeTVChart
-        fromTokenAddress={fromTokenAddress}
-        toTokenAddress={toTokenAddress}
-        infoTokens={infoTokens}
-        swapOption={swapOption}
-        chainId={chainId}
-        positions={positions}
-        savedShouldShowPositionLines={savedShouldShowPositionLines}
-        orders={orders}
-        setToTokenAddress={setToTokenAddress}
-      />
-    );
   };
 
   return (

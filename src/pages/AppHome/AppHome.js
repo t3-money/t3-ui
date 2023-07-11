@@ -5,7 +5,6 @@ import { Trans } from "@lingui/macro";
 import { HeaderLink } from "components/Header/HeaderLink";
 import arrow from "img/arrow-narrow-right.svg";
 import mobilet3 from "img/mobile-t3.png";
-import t3 from "img/Artwork_t3.svg";
 
 export default function AppHome({ showRedirectModal, redirectPopupTimestamp }) {
   const TradeNowButton = () => {
