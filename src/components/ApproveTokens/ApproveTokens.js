@@ -12,12 +12,10 @@ export default function ApproveTokens(props) {
   return (
     <div className="Approve-tokens-modal-body">
       <div className="Page-description">
-        <div className="Page-description">
-          <Trans>
-            To avoid multiple signings, please enable 1-click trading for all assets, and select "MAX" when prompted.
-            Your assets will remain in your wallet until you transact.
-          </Trans>
-        </div>
+        <Trans>
+          To avoid multiple signings, please enable 1-click trading for all assets, and select "MAX" when prompted. Your
+          assets will remain in your wallet until you transact.
+        </Trans>
       </div>
       {nonZeroBalanceTokens.map((tokenInfo, index) => (
         <ApproveTokenInput

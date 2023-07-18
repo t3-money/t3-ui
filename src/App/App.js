@@ -705,14 +705,17 @@ function FullApp() {
         className="Approve-tokens-modal"
         isVisible={approvalsModalVisible}
         setIsVisible={setApprovalsModalVisible}
-        label={`Approve Tokens`}
+        label={`Enable 1-Click Trading`}
       >
         <ApproveTokens
           chainId={chainId}
           pendingTxns={pendingTxns}
           setPendingTxns={setPendingTxns}
           nonZeroBalanceTokens={nonZeroBalanceTokens}
-          closeApprovalsModal={() => setApprovalsModalVisible(false)}
+          closeApprovalsModal={() => {
+            setApprovalsModalVisible(false);
+            setWalletModalVisible(true);
+          }}
         />
       </Modal>
       <Modal

@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
+  padding: 5px;
 }
 
 .Approve-tokens-section-top {
