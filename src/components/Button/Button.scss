@@ -61,6 +61,10 @@
     color:#13F287;
   }
 
+  &.await:hover {
+    background: rgba(19, 242, 135, 0.10);
+  }
+
   &.primary-action {
     background: linear-gradient(90deg, #2d42fc, #2e3dcd);
     color: #fff;

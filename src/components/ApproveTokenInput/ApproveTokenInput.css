@@ -34,11 +34,11 @@
 .Approve-token-input-max {
   position: absolute;
   right: 1rem;
-  top: 50%;
   transform: translateY(-50%);
   align-items: center;
   background: #2e2e2e;
   margin-right:180px;
+  margin-top:25px;
 }
 
 .Approve-token-input-max:hover {
