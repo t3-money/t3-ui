@@ -1496,3 +1496,27 @@ button.App-button {
     transform: rotate(360deg);
   }
 }
+
+.Email-input-prompt-text {
+  text-align:left;
+  font-size: 15px;
+}
+
+.Email-input-section {
+  display: flex;
+  width: 380px;
+  height: 47px;
+  padding: 12px;
+  align-items:center;
+  gap: 8px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #232323;
+}
+
+.Email-input-container {
+    padding-bottom: 5px;
+    width: 80%;
+
+}

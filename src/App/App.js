@@ -109,6 +109,7 @@ import { contractFetcher } from "lib/contracts";
 import { getTokens } from "config/tokens";
 import { SwapBox } from "pages/Swap/Swap";
 import StepIndicator from "components/StepIndicator/StepIndicator";
+import OtpInput from "components/OtpInput/OtpInput";
 
 if (window?.ethereum?.autoRefreshOnNetworkChange) {
   window.ethereum.autoRefreshOnNetworkChange = false;
@@ -218,6 +219,10 @@ function FullApp() {
     setShowConnectOptions(!showConnectOptions);
   };
 
+  const handleEmailVerifyClick = () => {
+    setShowEmailVerification(true);
+  };
+
   const userOnMobileDevice = "navigator" in window && isMobileDevice(window.navigator);
 
   const activateMetaMask = () => {
@@ -276,6 +281,8 @@ function FullApp() {
   const [approvalsModalVisible, setApprovalsModalVisible] = useState(false);
   const [showConnectOptions, setShowConnectOptions] = useState(false);
   const [hasTokens, setHasTokens] = useState(false);
+  const [showEmailVerification, setShowEmailVerification] = useState(false);
+  const [showOtp, setShowOtp] = useState(false);
   const connectWallet = () => setWalletModalVisible(true);
 
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
@@ -287,6 +294,7 @@ function FullApp() {
   const [isPnlInLeverage, setIsPnlInLeverage] = useState(false);
   const [shouldDisableValidationForTesting, setShouldDisableValidationForTesting] = useState(false);
   const [showPnlAfterFees, setShowPnlAfterFees] = useState(true);
+  const [emailText, setEmailText] = useState("");
 
   const [savedIsPnlInLeverage, setSavedIsPnlInLeverage] = useLocalStorageSerializeKey(
     [chainId, IS_PNL_IN_LEVERAGE_KEY],
@@ -346,6 +354,17 @@ function FullApp() {
     setIsSettingsVisible(false);
   };
 
+  const handleEmailEntered = (email) => {
+    // Regular expression for email validation
+    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+
+    if (emailRegex.test(email)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const localStorageCode = window.localStorage.getItem(REFERRAL_CODE_KEY);
   const baseUrl = getAppBaseUrl();
   let appRedirectUrl = baseUrl + selectedToPage;
@@ -374,7 +393,7 @@ function FullApp() {
     return [];
   }, []);
 
-  const walletVisibilityVariants = {
+  const optionalSectionVisibilityVariants = {
     hidden: { opacity: 0, y: "-100vh" },
     visible: { opacity: 1, y: 0, transition: { type: "ease", duration: 0.5 } },
     exit: { opacity: 0, y: "-100vh", transition: { type: "ease", duration: 0.5 } }, // New exit property
@@ -663,7 +682,7 @@ function FullApp() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                variants={walletVisibilityVariants}
+                variants={optionalSectionVisibilityVariants}
               >
                 <button className="Wallet-btn MetaMask-btn" onClick={activateMetaMask}>
                   <img src={metamaskImg} alt="MetaMask" />
@@ -692,12 +711,56 @@ function FullApp() {
               <Trans>{`Enable One-Click Trading`}</Trans>
             </div>
           </button>
-          <button className="Wallet-btn-approve" disabled>
+          <button className="Wallet-btn-approve" onClick={handleEmailVerifyClick} disabled={!(active && hasTokens)}>
             <StepIndicator digit={3} />
             <div>
               <Trans>{`Enable Email Notifications`}</Trans>
             </div>
           </button>
+          <AnimatePresence>
+            {showEmailVerification && (
+              <motion.div
+                className="Wallets-container"
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                variants={optionalSectionVisibilityVariants}
+              >
+                <div className="Email-input-prompt-text">
+                  <Trans>{`Your email`}</Trans>
+                </div>
+                <input
+                  className="Email-input-section"
+                  type="text"
+                  placeholder="Enter email here"
+                  value={emailText}
+                  onChange={(e) => setEmailText(e.target.value)}
+                />
+                <Button
+                  variant="approve-done"
+                  className="w-20 h-full"
+                  onClick={() => {
+                    if (handleEmailEntered(emailText)) {
+                      setShowOtp(true);
+                    }
+                  }}
+                >
+                  {`Done`}
+                </Button>
+                {showOtp && (
+                  <motion.div
+                    className="Wallets-container"
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    variants={optionalSectionVisibilityVariants}
+                  >
+                    <OtpInput />
+                  </motion.div>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </Modal>
 
