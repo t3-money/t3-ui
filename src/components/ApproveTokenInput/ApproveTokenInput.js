@@ -100,7 +100,7 @@ export default function ApproveTokenInput(props) {
           variant={isApproved ? "approved" : "await"}
           className="w-20 h-full"
           onClick={onApproveClick}
-          disabled={parseFloat(approveValue) === "0" || isApproving}
+          disabled={parseFloat(approveValue) === 0 || isApproving}
         >
           {isApproved ? "Approved!" : "Approve"}
         </Button>
