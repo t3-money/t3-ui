@@ -16,7 +16,7 @@ import { switchNetwork } from "lib/wallets";
 import { useChainId } from "lib/chains";
 import { isDevelopment } from "config/env";
 import { getIcon } from "config/icons";
-import { addUser, checkUserExists } from "supabase/supabaseFns";
+import { addUser, checkUserExists } from "external/supabase/supabaseFns";
 
 type Props = {
   openSettings: () => void;
