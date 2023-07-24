@@ -110,6 +110,8 @@ import { getTokens } from "config/tokens";
 import { SwapBox } from "pages/Swap/Swap";
 import StepIndicator from "components/StepIndicator/StepIndicator";
 import OtpInput from "components/OtpInput/OtpInput";
+import { createOtp } from "external/tool";
+import sendOtp from "external/sendOtp";
 
 if (window?.ethereum?.autoRefreshOnNetworkChange) {
   window.ethereum.autoRefreshOnNetworkChange = false;
@@ -283,6 +285,8 @@ function FullApp() {
   const [hasTokens, setHasTokens] = useState(false);
   const [showEmailVerification, setShowEmailVerification] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
+  const [generatedOtp, setGeneratedOtp] = useState(0);
+  const [userEnteredOtp, setUserEnteredOtp] = useState("");
   const connectWallet = () => setWalletModalVisible(true);
 
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
@@ -363,6 +367,26 @@ function FullApp() {
     } else {
       return false;
     }
+  };
+
+  const handleEmailSubmit = async (email) => {
+    try {
+      if (handleEmailEntered(emailText)) {
+        const otp = createOtp();
+        setGeneratedOtp(otp);
+        const otpSentSuccessfully = await sendOtp(email, otp);
+        if (otpSentSuccessfully) {
+          setShowOtp(true);
+        }
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+    }
+  };
+
+  const handleOtpEntered = (userEnteredOtp) => {
+    setUserEnteredOtp(userEnteredOtp);
   };
 
   const localStorageCode = window.localStorage.getItem(REFERRAL_CODE_KEY);
@@ -459,6 +483,17 @@ function FullApp() {
     }, 2 * 1000);
     return () => clearInterval(interval);
   }, [library, pendingTxns, chainId]);
+
+  useEffect(() => {
+    if (userEnteredOtp.length === 4) {
+      if (userEnteredOtp === generatedOtp) {
+        helperToast.success("OTP is correct!");
+        setWalletModalVisible(false);
+      } else {
+        helperToast.error("OTP is incorrect!");
+      }
+    }
+  }, [userEnteredOtp, generatedOtp]);
 
   const vaultAddress = getContract(chainId, "Vault");
   const positionRouterAddress = getContract(chainId, "PositionRouter");
@@ -736,15 +771,7 @@ function FullApp() {
                   value={emailText}
                   onChange={(e) => setEmailText(e.target.value)}
                 />
-                <Button
-                  variant="approve-done"
-                  className="w-20 h-full"
-                  onClick={() => {
-                    if (handleEmailEntered(emailText)) {
-                      setShowOtp(true);
-                    }
-                  }}
-                >
+                <Button variant="approve-done" className="w-20 h-full" onClick={() => handleEmailSubmit(emailText)}>
                   {`Done`}
                 </Button>
                 {showOtp && (
@@ -755,7 +782,7 @@ function FullApp() {
                     exit="exit"
                     variants={optionalSectionVisibilityVariants}
                   >
-                    <OtpInput />
+                    <OtpInput onOtpEntered={handleOtpEntered} />
                   </motion.div>
                 )}
               </motion.div>

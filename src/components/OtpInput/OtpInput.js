@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./OtpInput.css";
 
-function OtpInput() {
+function OtpInput({ onOtpEntered }) {
   const [inputValues, setInputValues] = useState(Array(4).fill(""));
   const inputRefs = useRef([]);
 
@@ -14,6 +14,12 @@ function OtpInput() {
       inputRefs.current[index + 1].focus();
     }
   };
+
+  useEffect(() => {
+    if (inputValues.join("").length === 4) {
+      onOtpEntered(inputValues.join(""));
+    }
+  }, [inputValues, onOtpEntered]);
 
   useEffect(() => {
     inputRefs.current = inputRefs.current.slice(0, inputValues.length);
