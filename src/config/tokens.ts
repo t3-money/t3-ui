@@ -1,6 +1,15 @@
 import { ethers } from "ethers";
 import { getContract } from "./contracts";
-import { ARBITRUM, ARBITRUM_TESTNET, AVALANCHE, AVALANCHE_FUJI, MAINNET, SEPOLIA_TESTNET, TESTNET } from "./chains";
+import {
+  ARBITRUM,
+  ARBITRUM_TESTNET,
+  AVALANCHE,
+  AVALANCHE_FUJI,
+  MAINNET,
+  SEPOLIA_TESTNET,
+  TESTNET,
+  OPTIMISM_GOERLI_TESTNET,
+} from "./chains";
 import { Token } from "domain/tokens";
 
 export const TOKENS: { [chainId: number]: Token[] } = {
@@ -434,9 +443,63 @@ export const TOKENS: { [chainId: number]: Token[] } = {
       imageUrl: "https://assets.coingecko.com/coins/images/325/small/Tether.png?1668148663",
     },
   ],
+  [OPTIMISM_GOERLI_TESTNET]: [
+    {
+      name: "Ethereum",
+      symbol: "ETH",
+      decimals: 18,
+      address: ethers.constants.AddressZero,
+      isNative: true,
+      isShortable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
+    },
+    // {
+    //   name: "USD Gambit",
+    //   symbol: "USDG",
+    //   decimals: 18,
+    //   address: "0xfa55A08911E424D03D40fFea5257E06b22bAe0C6",
+    //   isUsdg: true,
+    //   imageUrl: "https://assets.coingecko.com/coins/images/15886/small/usdg-02.png",
+    // },
+    {
+      name: "Wrapped Ethereum (WETH)",
+      symbol: "ETH",
+      address: "0x743E73cAe7E5B9838a5eb2CfAd3A4c8aCf41614d",
+      isWrapped: true,
+      decimals: 18,
+      isShortable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/2518/small/weth.png?1628852295",
+    },
+    {
+      name: "DAI",
+      symbol: "DAI",
+      address: "0x1eB733DA495C92CDCaA1F0591895d63C8F028AfC",
+      decimals: 18,
+      isStable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/9956/small/4943.png?1636636734",
+    },
+    {
+      name: "Link",
+      symbol: "LINK",
+      address: "0xfcf789E040305b647832Bb037384dCeCbbbB02D1",
+      decimals: 18,
+      isStable: false,
+      isShortable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png?1547034700",
+    },
+    {
+      name: "USD Tether",
+      symbol: "USDT",
+      address: "0x3aA11a6519E823091e408f5f8fc744e5035b4d6D",
+      decimals: 6,
+      isStable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/325/small/Tether.png?1668148663",
+    },
+  ],
 };
 
 export const ADDITIONAL_TOKENS: { [chainId: number]: Token[] } = {
+  // @todo need contract addresses here
   [ARBITRUM]: [
     {
       name: "GMX",
