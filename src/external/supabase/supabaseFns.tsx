@@ -14,13 +14,29 @@ export const addUser = async (walletAddress: string) => {
 };
 
 // Function to check if a user with a certain wallet exists
-export const checkUserExists = async (walletAddress: string) => {
-  const { data, error } = await supabase.from("users").select("id").eq("wallet_address", walletAddress);
+export const getUserByWalletAddress = async (walletAddress: string) => {
+  const { data, error } = await supabase.from("users").select("id, email_address").eq("wallet_address", walletAddress);
 
-  if (error) {
-    console.error("Error checking user:", error);
+  if (error || data.length === 0) {
+    console.error("Error fetching user:", error);
     return null;
   }
 
-  return data && data.length > 0;
+  return data[0];
+};
+
+
+export const updateUserEmail = async (walletAddress: string, email: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { data: users, error } = await supabase
+    .from("users")
+    .update({ email_address: email })
+    .eq("wallet_address", walletAddress);
+
+  if (error) {
+    console.error("Error updating user email:", error);
+    return false;
+  }
+
+  return true;
 };

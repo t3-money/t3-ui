@@ -110,8 +110,9 @@ import { getTokens } from "config/tokens";
 import { SwapBox } from "pages/Swap/Swap";
 import StepIndicator from "components/StepIndicator/StepIndicator";
 import OtpInput from "components/OtpInput/OtpInput";
-import { createOtp } from "external/tool";
+import { createOtp } from "config/tool";
 import sendOtp from "external/sendOtp";
+import { updateUserEmail } from "external/supabase/supabaseFns";
 
 if (window?.ethereum?.autoRefreshOnNetworkChange) {
   window.ethereum.autoRefreshOnNetworkChange = false;
@@ -287,6 +288,7 @@ function FullApp() {
   const [showOtp, setShowOtp] = useState(false);
   const [generatedOtp, setGeneratedOtp] = useState(0);
   const [userEnteredOtp, setUserEnteredOtp] = useState("");
+  const [doesUserHaveEmail, setDoesUserHaveEmail] = useState(false);
   const connectWallet = () => setWalletModalVisible(true);
 
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
@@ -372,8 +374,11 @@ function FullApp() {
   const handleEmailSubmit = async (email) => {
     try {
       if (handleEmailEntered(emailText)) {
+        // generate new otp
         const otp = createOtp();
         setGeneratedOtp(otp);
+
+        // check if email has been sent with otp
         const otpSentSuccessfully = await sendOtp(email, otp);
         if (otpSentSuccessfully) {
           setShowOtp(true);
@@ -487,13 +492,26 @@ function FullApp() {
   useEffect(() => {
     if (userEnteredOtp.length === 4) {
       if (userEnteredOtp === generatedOtp) {
-        helperToast.success("OTP is correct!");
-        setWalletModalVisible(false);
+        const updateEmail = async () => {
+          const updateEmail = await updateUserEmail(account, emailText);
+
+          if (updateEmail) {
+            helperToast.success("Email verified successfully!");
+            setWalletModalVisible(false);
+            setShowOtp(false);
+            setShowEmailVerification(false);
+            setEmailText("");
+          } else {
+            helperToast.error("Error updating email.");
+          }
+        };
+
+        updateEmail();
       } else {
-        helperToast.error("OTP is incorrect!");
+        helperToast.error("OTP entered is incorrect.");
       }
     }
-  }, [userEnteredOtp, generatedOtp]);
+  }, [userEnteredOtp, generatedOtp, account, emailText]);
 
   const vaultAddress = getContract(chainId, "Vault");
   const positionRouterAddress = getContract(chainId, "PositionRouter");
@@ -550,6 +568,7 @@ function FullApp() {
             disconnectAccountAndCloseSettings={disconnectAccountAndCloseSettings}
             openSettings={openSettings}
             setWalletModalVisible={setWalletModalVisible}
+            setDoesUserHaveEmail={setDoesUserHaveEmail}
             redirectPopupTimestamp={redirectPopupTimestamp}
             showRedirectModal={showRedirectModal}
           />
@@ -746,12 +765,16 @@ function FullApp() {
               <Trans>{`Enable One-Click Trading`}</Trans>
             </div>
           </button>
-          <button className="Wallet-btn-approve" onClick={handleEmailVerifyClick} disabled={!(active && hasTokens)}>
-            <StepIndicator digit={3} />
-            <div>
-              <Trans>{`Enable Email Notifications`}</Trans>
-            </div>
-          </button>
+
+          {!doesUserHaveEmail && (
+            <button className="Wallet-btn-approve" onClick={handleEmailVerifyClick} disabled={!(active && hasTokens)}>
+              <StepIndicator digit={3} />
+              <div>
+                <Trans>{`Enable Email Notifications`}</Trans>
+              </div>
+            </button>
+          )}
+
           <AnimatePresence>
             {showEmailVerification && (
               <motion.div
