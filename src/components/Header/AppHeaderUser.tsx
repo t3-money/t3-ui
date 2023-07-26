@@ -17,6 +17,7 @@ import { useChainId } from "lib/chains";
 import { isDevelopment } from "config/env";
 import { getIcon } from "config/icons";
 import { addUser, checkUserExists } from "supabase/supabaseFns";
+import FaucetDropdown from "../FaucetDropdown/FaucetDropdown";
 
 type Props = {
   openSettings: () => void;
@@ -126,10 +127,8 @@ export function AppHeaderUser({
   return (
     <div className="App-header-user">
       {chainId === SEPOLIA_TESTNET && (
-        <div className="App-header-trade-link">
-          <a href={`http://t3-finance-faucet.s3-website.us-east-2.amazonaws.com/`} target="_blank" rel="noreferrer">
-            <button className="default-btn">{`Faucet`}</button>
-          </a>
+        <div className="App-header-faucet">
+          <FaucetDropdown />
         </div>
       )}
 
