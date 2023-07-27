@@ -368,21 +368,18 @@ function FullApp() {
   };
 
   const handleEmailSubmit = async (email) => {
-    try {
-      if (handleEmailEntered(emailText)) {
-        // generate new otp
-        const otp = createOtp();
-        setGeneratedOtp(otp);
+    if (handleEmailEntered(emailText)) {
+      // generate new otp
+      const otp = createOtp();
+      setGeneratedOtp(otp);
 
-        // check if email has been sent with otp
-        const otpSentSuccessfully = await sendOtp(email, otp);
-        if (otpSentSuccessfully) {
-          setShowOtp(true);
-        }
+      // check if email has been sent with otp
+      const otpSentSuccessfully = await sendOtp(email, otp);
+      if (otpSentSuccessfully) {
+        setShowOtp(true);
+      } else {
+        helperToast.error("Invalid Email Address.");
       }
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
     }
   };
 
