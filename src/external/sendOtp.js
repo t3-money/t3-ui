@@ -16,9 +16,7 @@ const sendOtp = async (email, otp) => {
 
     return true;
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-    return false;
+    throw new Error(error);
   }
 };
 
