@@ -364,11 +364,7 @@ function FullApp() {
     // Regular expression for email validation
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 
-    if (emailRegex.test(email)) {
-      return true;
-    } else {
-      return false;
-    }
+    return Boolean(emailRegex.test(email));
   };
 
   const handleEmailSubmit = async (email) => {
