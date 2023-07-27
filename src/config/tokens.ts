@@ -499,7 +499,6 @@ export const TOKENS: { [chainId: number]: Token[] } = {
 };
 
 export const ADDITIONAL_TOKENS: { [chainId: number]: Token[] } = {
-  // @todo need contract addresses here
   [ARBITRUM]: [
     {
       name: "GMX",
