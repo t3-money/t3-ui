@@ -364,22 +364,29 @@ function FullApp() {
     // Regular expression for email validation
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 
-    return Boolean(emailRegex.test(email));
+    if (emailRegex.test(email)) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const handleEmailSubmit = async (email) => {
-    if (handleEmailEntered(emailText)) {
-      // generate new otp
-      const otp = createOtp();
-      setGeneratedOtp(otp);
+    try {
+      if (handleEmailEntered(emailText)) {
+        // generate new otp
+        const otp = createOtp();
+        setGeneratedOtp(otp);
 
-      // check if email has been sent with otp
-      const otpSentSuccessfully = await sendOtp(email, otp);
-      if (otpSentSuccessfully) {
-        setShowOtp(true);
-      } else {
-        helperToast.error("Invalid Email Address.");
+        // check if email has been sent with otp
+        const otpSentSuccessfully = await sendOtp(email, otp);
+        if (otpSentSuccessfully) {
+          setShowOtp(true);
+        }
       }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
     }
   };
 
