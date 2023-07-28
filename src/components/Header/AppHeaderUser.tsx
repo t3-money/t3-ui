@@ -47,8 +47,7 @@ if (isDevelopment()) {
   NETWORK_OPTIONS.push({
     label: getChainName(OPTIMISM_GOERLI_TESTNET),
     value: OPTIMISM_GOERLI_TESTNET,
-    // @todo get new logo
-    icon: getIcon(SEPOLIA_TESTNET, "network"),
+    icon: getIcon(OPTIMISM_GOERLI_TESTNET, "network"),
     color: "#264f79",
   });
 }
