@@ -20,7 +20,6 @@ import Home from "pages/Home/Home";
 import AppHome from "pages/AppHome/AppHome";
 import Dashboard from "pages/Dashboard/Dashboard";
 import Stats from "pages/Stats/Stats";
-import Ecosystem from "pages/Ecosystem/Ecosystem";
 import Stake from "pages/Stake/Stake";
 import { Exchange } from "pages/Exchange/Exchange";
 import Actions from "pages/Actions/Actions";
@@ -65,7 +64,6 @@ import TermsAndConditions from "pages/TermsAndConditions/TermsAndConditions";
 import { useLocalStorage } from "react-use";
 import { RedirectPopupModal } from "components/ModalViews/RedirectModal";
 import { REDIRECT_POPUP_TIMESTAMP_KEY } from "config/localStorage";
-import Jobs from "pages/Jobs/Jobs";
 
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
@@ -639,14 +637,8 @@ function FullApp() {
                   savedShouldDisableValidationForTesting={savedShouldDisableValidationForTesting}
                 />
               </Route>
-              <Route exact path="/jobs">
-                <Jobs />
-              </Route>
               <Route exact path="/buy_gmx">
                 <BuyGMX />
-              </Route>
-              <Route exact path="/ecosystem">
-                <Ecosystem />
               </Route>
               <Route exact path="/referrals">
                 <Referrals pendingTxns={pendingTxns} connectWallet={connectWallet} setPendingTxns={setPendingTxns} />
