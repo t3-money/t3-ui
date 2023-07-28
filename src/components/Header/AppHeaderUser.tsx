@@ -11,18 +11,19 @@ import cx from "classnames";
 import { Trans } from "@lingui/macro";
 import NetworkDropdown from "../NetworkDropdown/NetworkDropdown";
 import LanguagePopupHome from "../NetworkDropdown/LanguagePopupHome";
-import { ARBITRUM, SEPOLIA_TESTNET, getChainName } from "config/chains";
+import { ARBITRUM, OPTIMISM_GOERLI_TESTNET, SEPOLIA_TESTNET, getChainName } from "config/chains";
 import { switchNetwork } from "lib/wallets";
 import { useChainId } from "lib/chains";
 import { isDevelopment } from "config/env";
 import { getIcon } from "config/icons";
-import { addUser, checkUserExists } from "supabase/supabaseFns";
 import FaucetDropdown from "../FaucetDropdown/FaucetDropdown";
+import { addUser, getUserByWalletAddress } from "external/supabase/supabaseFns";
 
 type Props = {
   openSettings: () => void;
   small?: boolean;
   setWalletModalVisible: (visible: boolean) => void;
+  setDoesUserHaveEmail: (visible: boolean) => void;
   disconnectAccountAndCloseSettings: () => void;
   redirectPopupTimestamp: number;
   showRedirectModal: (to: string) => void;
@@ -44,12 +45,20 @@ if (isDevelopment()) {
     icon: getIcon(SEPOLIA_TESTNET, "network"),
     color: "#264f79",
   });
+  NETWORK_OPTIONS.push({
+    label: getChainName(OPTIMISM_GOERLI_TESTNET),
+    value: OPTIMISM_GOERLI_TESTNET,
+    // @todo get new logo
+    icon: getIcon(SEPOLIA_TESTNET, "network"),
+    color: "#264f79",
+  });
 }
 
 export function AppHeaderUser({
   openSettings,
   small,
   setWalletModalVisible,
+  setDoesUserHaveEmail,
   disconnectAccountAndCloseSettings,
   redirectPopupTimestamp,
   showRedirectModal,
@@ -62,10 +71,14 @@ export function AppHeaderUser({
     if (active && account) {
       // check that user is active and account is successfully signed up
       const checkAndCreateUser = async () => {
-        const userExists = await checkUserExists(account);
+        const user = await getUserByWalletAddress(account);
 
-        if (!userExists) {
-          // Add user to the database
+        if (user) {
+          // User exists, check if email_address is present
+          if (user.email_address) {
+            setDoesUserHaveEmail(true);
+          }
+        } else {
           const newUser = await addUser(account);
           // eslint-disable-next-line no-console
           console.log("New user added:", newUser);
@@ -74,7 +87,7 @@ export function AppHeaderUser({
 
       checkAndCreateUser();
     }
-  }, [account, active, setWalletModalVisible]);
+  }, [account, active, setDoesUserHaveEmail, setWalletModalVisible]);
 
   const onNetworkSelect = useCallback(
     (option) => {
