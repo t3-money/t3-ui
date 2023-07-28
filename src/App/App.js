@@ -363,7 +363,6 @@ function FullApp() {
   const handleEmailEntered = (email) => {
     // Regular expression for email validation
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-
     return Boolean(emailRegex.test(email));
   };
 
@@ -377,9 +376,9 @@ function FullApp() {
       const otpSentSuccessfully = await sendOtp(email, otp);
       if (otpSentSuccessfully) {
         setShowOtp(true);
-      } else {
-        helperToast.error("Invalid Email Address.");
       }
+    } else {
+      helperToast.error("Invalid Email Address.");
     }
   };
 
@@ -777,9 +776,6 @@ function FullApp() {
                 exit="exit"
                 variants={optionalSectionVisibilityVariants}
               >
-                <div className="Email-input-prompt-text">
-                  <Trans>{`Your email`}</Trans>
-                </div>
                 <input
                   className="Email-input-section"
                   type="text"
