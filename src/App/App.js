@@ -47,7 +47,6 @@ import "styles/Input.css";
 import metamaskImg from "img/metamask.png";
 import coinbaseImg from "img/coinbaseWallet.png";
 import walletConnectImg from "img/walletconnect-circle-blue.svg";
-import arrowIcn from "img/arrow_icn.svg";
 import useEventToast from "components/EventToast/useEventToast";
 import EventToastContainer from "components/EventToast/EventToastContainer";
 import SEO from "components/Common/SEO";
@@ -107,7 +106,7 @@ import { useInfoTokens } from "domain/tokens";
 import { contractFetcher } from "lib/contracts";
 import { getTokens } from "config/tokens";
 import { SwapBox } from "pages/Swap/Swap";
-import StepIndicator from "components/StepIndicator/StepIndicator";
+import UserOnboardSection from "components/UserOnboardSection/UserOnboardSection";
 import OtpInput from "components/OtpInput/OtpInput";
 import { createOtp } from "config/tool";
 import sendOtp from "external/sendOtp";
@@ -210,11 +209,13 @@ function FullApp() {
   const connectInjectedWallet = getInjectedHandler(activate, deactivate);
   const activateWalletConnect = () => {
     getWalletConnectHandler(activate, deactivate, setActivatingConnector)();
+    setActiveStep(2);
   };
 
   const handleApproveTokens = () => {
     setApprovalsModalVisible(true);
     setWalletModalVisible(false);
+    setActiveStep(3);
   };
 
   const handleConnectWallet = () => {
@@ -223,6 +224,7 @@ function FullApp() {
 
   const handleEmailVerifyClick = () => {
     setShowEmailVerification(true);
+    setActiveStep(4);
   };
 
   const userOnMobileDevice = "navigator" in window && isMobileDevice(window.navigator);
@@ -288,6 +290,7 @@ function FullApp() {
   const [generatedOtp, setGeneratedOtp] = useState(0);
   const [userEnteredOtp, setUserEnteredOtp] = useState("");
   const [doesUserHaveEmail, setDoesUserHaveEmail] = useState(false);
+  const [activeStep, setActiveStep] = useState(1);
   const connectWallet = () => setWalletModalVisible(true);
 
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
@@ -323,6 +326,7 @@ function FullApp() {
     localStorage.setItem(CURRENT_PROVIDER_LOCALSTORAGE_KEY, providerName);
     activateInjectedProvider(providerName);
     connectInjectedWallet();
+    setActiveStep(2);
     setShowConnectOptions(false);
   };
 
@@ -708,13 +712,14 @@ function FullApp() {
           <Trans>{`Connect your wallet and agree to terms.`}</Trans>
         </div>
         <div className="Modal-content-wrapper">
-          <button className="Wallet-btn-approve" onClick={handleConnectWallet}>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <StepIndicator digit={1} />
-              <Trans>{`Connect Wallet`}</Trans>
-            </div>
-            <img src={arrowIcn} alt="WalletConnect" />
-          </button>
+          <UserOnboardSection
+            step={1}
+            text={`Connect Wallet`}
+            handleClick={handleConnectWallet}
+            disabled={false}
+            showArrow={true}
+            isActive={activeStep === 2}
+          />
 
           <AnimatePresence>
             {showConnectOptions && (
@@ -746,22 +751,25 @@ function FullApp() {
               </motion.div>
             )}
           </AnimatePresence>
-          <button className="Wallet-btn-approve" onClick={handleApproveTokens} disabled={!(active && hasTokens)}>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <StepIndicator digit={2} />
-              <Trans>{`Enable One-Click Trading`}</Trans>
-            </div>
-            <img src={arrowIcn} alt="WalletConnect" />
-          </button>
+
+          <UserOnboardSection
+            step={2}
+            text={`Enable One-Click Trading`}
+            handleClick={handleApproveTokens}
+            disabled={!(active && hasTokens)}
+            showArrow={true}
+            isActive={activeStep === 3}
+          />
 
           {!doesUserHaveEmail && (
-            <button className="Wallet-btn-approve" onClick={handleEmailVerifyClick} disabled={!(active && hasTokens)}>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <StepIndicator digit={3} />
-                <Trans>{`Enable Email Notifications`}</Trans>
-              </div>
-              <img src={arrowIcn} alt="WalletConnect" />
-            </button>
+            <UserOnboardSection
+              step={3}
+              text={`Enable Email Notifications`}
+              handleClick={handleEmailVerifyClick}
+              disabled={!(active && hasTokens)}
+              showArrow={true}
+              isActive={activeStep === 4}
+            />
           )}
 
           <AnimatePresence>
