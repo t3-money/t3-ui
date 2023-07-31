@@ -139,11 +139,11 @@ export function AppHeaderUser({
 
   return (
     <div className="App-header-user">
-      {chainId === SEPOLIA_TESTNET && (
+      {chainId === OPTIMISM_GOERLI_TESTNET || chainId === SEPOLIA_TESTNET ? (
         <div className="App-header-faucet">
           <FaucetDropdown />
         </div>
-      )}
+      ) : null}
 
       {showConnectionOptions ? (
         <>
