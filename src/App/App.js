@@ -47,6 +47,7 @@ import "styles/Input.css";
 import metamaskImg from "img/metamask.png";
 import coinbaseImg from "img/coinbaseWallet.png";
 import walletConnectImg from "img/walletconnect-circle-blue.svg";
+import arrowIcn from "img/arrow_icn.svg";
 import useEventToast from "components/EventToast/useEventToast";
 import EventToastContainer from "components/EventToast/EventToastContainer";
 import SEO from "components/Common/SEO";
@@ -413,9 +414,9 @@ function FullApp() {
   }, []);
 
   const optionalSectionVisibilityVariants = {
-    hidden: { opacity: 0, y: "-100vh" },
-    visible: { opacity: 1, y: 0, transition: { type: "ease", duration: 0.5 } },
-    exit: { opacity: 0, y: "-100vh", transition: { type: "ease", duration: 0.5 } }, // New exit property
+    hidden: { opacity: 0, y: "-20vh" },
+    visible: { opacity: 1, y: 0, transition: { type: "ease", duration: 1 } },
+    exit: { opacity: 0, y: "-20vh", transition: { type: "ease", duration: 1 } },
   };
 
   useEffect(() => {
@@ -708,11 +709,13 @@ function FullApp() {
         </div>
         <div className="Modal-content-wrapper">
           <button className="Wallet-btn-approve" onClick={handleConnectWallet}>
-            <StepIndicator digit={1} />
-            <div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <StepIndicator digit={1} />
               <Trans>{`Connect Wallet`}</Trans>
             </div>
+            <img src={arrowIcn} alt="WalletConnect" />
           </button>
+
           <AnimatePresence>
             {showConnectOptions && (
               <motion.div
@@ -744,18 +747,20 @@ function FullApp() {
             )}
           </AnimatePresence>
           <button className="Wallet-btn-approve" onClick={handleApproveTokens} disabled={!(active && hasTokens)}>
-            <StepIndicator digit={2} />
-            <div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <StepIndicator digit={2} />
               <Trans>{`Enable One-Click Trading`}</Trans>
             </div>
+            <img src={arrowIcn} alt="WalletConnect" />
           </button>
 
           {!doesUserHaveEmail && (
             <button className="Wallet-btn-approve" onClick={handleEmailVerifyClick} disabled={!(active && hasTokens)}>
-              <StepIndicator digit={3} />
-              <div>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <StepIndicator digit={3} />
                 <Trans>{`Enable Email Notifications`}</Trans>
               </div>
+              <img src={arrowIcn} alt="WalletConnect" />
             </button>
           )}
 
