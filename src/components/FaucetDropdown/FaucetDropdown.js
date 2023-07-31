@@ -18,21 +18,19 @@ function FaucetDropdown() {
   const { active, account, library } = useWeb3React();
   const { chainId } = useChainId();
 
-  const [amount, setAmount] = useState(1000);
-  const [wbtcamount, setWbtcAmount] = useState("0.01");
+  const [amount] = useState(1000);
+  const [wbtcamount] = useState("0.01");
   const [tokens, setTokens] = useState();
 
   useEffect(() => {
-    if (active && account) {
-      const getToken = async () => {
-        const token = getTokens(chainId);
-        if (token) {
-          setTokens(token);
-        }
-      };
+    const getToken = async () => {
+      const token = getTokens(chainId);
+      if (token) {
+        setTokens(token);
+      }
+    };
 
-      getToken();
-    }
+    getToken();
   }, [chainId]);
 
   function mint(tokenSymbol) {
