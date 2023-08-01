@@ -5,7 +5,7 @@ import "./UserOnboardSection.css";
 import arrowIcn from "img/arrow_icn.svg";
 import stepDone from "img/icn_stepdone.svg";
 
-const UserOnboardSection = ({ step, text, handleClick, disabled, showArrow, isActive }) => {
+const UserOnboardSection = ({ step, text, handleClick, disabled, isActive }) => {
   const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {

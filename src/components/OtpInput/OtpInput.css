@@ -49,3 +49,20 @@
   display: flex;
   gap: 5px;
 }
+
+.resend-code {
+  border: none;
+  background: none;
+  text-decoration: underline;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+}
+
+.resend-code:hover {
+  color: #13f287;
+}

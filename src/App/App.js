@@ -416,9 +416,9 @@ function FullApp() {
   }, []);
 
   const optionalSectionVisibilityVariants = {
-    hidden: { opacity: 0, y: "-20vh" },
-    visible: { opacity: 1, y: 0, transition: { type: "ease", duration: 1 } },
-    exit: { opacity: 0, y: "-20vh", transition: { type: "ease", duration: 1 } },
+    hidden: { opacity: 0, scaleY: 0 },
+    visible: { opacity: 1, scaleY: 1, transition: { type: "ease", duration: 1 } },
+    exit: { opacity: 0, scaleY: 0, transition: { type: "ease", duration: 1 } },
   };
 
   useEffect(() => {
@@ -730,6 +730,7 @@ function FullApp() {
                 animate="visible"
                 exit="exit"
                 variants={optionalSectionVisibilityVariants}
+                style={{ originY: 0 }}
               >
                 <button className="Wallet-btn MetaMask-btn" onClick={activateMetaMask}>
                   <img src={metamaskImg} alt="MetaMask" />
@@ -781,6 +782,7 @@ function FullApp() {
                 animate="visible"
                 exit="exit"
                 variants={optionalSectionVisibilityVariants}
+                style={{ originY: 0 }}
               >
                 <input
                   className="Email-input-section"
@@ -799,8 +801,13 @@ function FullApp() {
                     animate="visible"
                     exit="exit"
                     variants={optionalSectionVisibilityVariants}
+                    style={{ originY: 0 }}
                   >
-                    <OtpInput onOtpEntered={handleOtpEntered} generatedOtp={generatedOtp} />
+                    <OtpInput
+                      onOtpEntered={handleOtpEntered}
+                      generatedOtp={generatedOtp}
+                      resendHandler={() => handleEmailSubmit(emailText)}
+                    />
                   </motion.div>
                 )}
               </motion.div>

@@ -4,7 +4,7 @@ import cx from "classnames";
 import "./OtpInput.css";
 import { helperToast } from "lib/helperToast";
 
-function OtpInput({ onOtpEntered, generatedOtp }) {
+function OtpInput({ onOtpEntered, generatedOtp, resendHandler }) {
   const [inputValues, setInputValues] = useState(Array(4).fill(""));
   const [wrongOTP, setWrongOTP] = useState(false);
   const inputRefs = useRef([]);
@@ -14,7 +14,7 @@ function OtpInput({ onOtpEntered, generatedOtp }) {
     newValues[index] = event.target.value;
     setInputValues(newValues);
     setWrongOTP(false);
-    
+
     if (event.target.value && index < inputValues.length - 1) {
       inputRefs.current[index + 1].focus();
     }
@@ -85,6 +85,9 @@ function OtpInput({ onOtpEntered, generatedOtp }) {
           />
         ))}
       </div>
+      <button className="resend-code" onClick={resendHandler}>
+        <Trans id="Resend Code" />
+      </button>
     </div>
   );
 }
