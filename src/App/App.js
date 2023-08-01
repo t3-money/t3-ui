@@ -215,7 +215,6 @@ function FullApp() {
   const handleApproveTokens = () => {
     setApprovalsModalVisible(true);
     setWalletModalVisible(false);
-    setActiveStep(3);
   };
 
   const handleConnectWallet = () => {
@@ -224,7 +223,6 @@ function FullApp() {
 
   const handleEmailVerifyClick = () => {
     setShowEmailVerification(true);
-    setActiveStep(4);
   };
 
   const userOnMobileDevice = "navigator" in window && isMobileDevice(window.navigator);
@@ -485,17 +483,20 @@ function FullApp() {
   }, [library, pendingTxns, chainId]);
 
   useEffect(() => {
-    if (userEnteredOtp.length === 4) {
+    if (userEnteredOtp.match(/^\d{4}$/)) {
       if (userEnteredOtp === generatedOtp) {
         const updateEmail = async () => {
           const updateEmail = await updateUserEmail(account, emailText);
 
           if (updateEmail) {
             helperToast.success("Email verified successfully!");
+
+            // reset state vars
             setWalletModalVisible(false);
             setShowOtp(false);
             setShowEmailVerification(false);
             setEmailText("");
+            setActiveStep(4);
           } else {
             helperToast.error("Error updating email.");
           }
@@ -766,7 +767,7 @@ function FullApp() {
               step={3}
               text={`Enable Email Notifications`}
               handleClick={handleEmailVerifyClick}
-              disabled={!(active && hasTokens)}
+              disabled={!active}
               showArrow={true}
               isActive={activeStep === 4}
             />
@@ -799,7 +800,7 @@ function FullApp() {
                     exit="exit"
                     variants={optionalSectionVisibilityVariants}
                   >
-                    <OtpInput onOtpEntered={handleOtpEntered} />
+                    <OtpInput onOtpEntered={handleOtpEntered} generatedOtp={generatedOtp} />
                   </motion.div>
                 )}
               </motion.div>
@@ -822,6 +823,7 @@ function FullApp() {
           closeApprovalsModal={() => {
             setApprovalsModalVisible(false);
             setWalletModalVisible(true);
+            setActiveStep(3);
           }}
         />
       </Modal>
