@@ -67,7 +67,7 @@ function OtpInput({ onOtpEntered, generatedOtp, resendHandler }) {
     <div className="input-container">
       <Trans id="Enter Code" render={({ translation }) => <div className="trans-title">{translation}</div>} />
       <Trans
-        id="Check your email address for the OTP"
+        id={!wrongOTP ? "Check your email address for the OTP" : "OTP Verification Failed, Try Again"}
         render={({ translation }) => <div className="trans-subtitle">{translation}</div>}
       />
       <div className="inputs-wrapper">

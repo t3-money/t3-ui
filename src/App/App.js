@@ -47,6 +47,7 @@ import "styles/Input.css";
 import metamaskImg from "img/metamask.png";
 import coinbaseImg from "img/coinbaseWallet.png";
 import walletConnectImg from "img/walletconnect-circle-blue.svg";
+import emailIcn from "img/icn_email.svg";
 import useEventToast from "components/EventToast/useEventToast";
 import EventToastContainer from "components/EventToast/EventToastContainer";
 import SEO from "components/Common/SEO";
@@ -784,13 +785,16 @@ function FullApp() {
                 variants={optionalSectionVisibilityVariants}
                 style={{ originY: 0 }}
               >
-                <input
-                  className="Email-input-section"
-                  type="text"
-                  placeholder="Enter email here"
-                  value={emailText}
-                  onChange={(e) => setEmailText(e.target.value)}
-                />
+                <div className="Email-input-section">
+                  <img src={emailIcn} alt="Email icon" />
+                  <input
+                    type="text"
+                    placeholder="Enter email here"
+                    value={emailText}
+                    onChange={(e) => setEmailText(e.target.value)}
+                  />
+                </div>
+
                 <Button variant="approve-done" className="w-20 h-full" onClick={() => handleEmailSubmit(emailText)}>
                   {`Done`}
                 </Button>
