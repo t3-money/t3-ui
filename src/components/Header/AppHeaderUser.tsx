@@ -22,6 +22,7 @@ type Props = {
   openSettings: () => void;
   small?: boolean;
   setWalletModalVisible: (visible: boolean) => void;
+  setApprovalsModalVisible: (visible: boolean) => void;
   setDoesUserHaveEmail: (visible: boolean) => void;
   disconnectAccountAndCloseSettings: () => void;
   redirectPopupTimestamp: number;
@@ -38,12 +39,6 @@ const NETWORK_OPTIONS = [
 ];
 
 if (isDevelopment()) {
-  // NETWORK_OPTIONS.push({
-  //   label: getChainName(SEPOLIA_TESTNET),
-  //   value: SEPOLIA_TESTNET,
-  //   icon: getIcon(SEPOLIA_TESTNET, "network"),
-  //   color: "#264f79",
-  // });
   NETWORK_OPTIONS.push({
     label: getChainName(OPTIMISM_GOERLI_TESTNET),
     value: OPTIMISM_GOERLI_TESTNET,
@@ -56,6 +51,7 @@ export function AppHeaderUser({
   openSettings,
   small,
   setWalletModalVisible,
+  setApprovalsModalVisible,
   setDoesUserHaveEmail,
   disconnectAccountAndCloseSettings,
   redirectPopupTimestamp,
@@ -124,6 +120,7 @@ export function AppHeaderUser({
               selectorLabel={selectorLabel}
               onNetworkSelect={onNetworkSelect}
               openSettings={openSettings}
+              setApprovalsModalVisible={setApprovalsModalVisible}
             />
           </>
         ) : (

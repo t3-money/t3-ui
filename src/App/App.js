@@ -495,18 +495,23 @@ function FullApp() {
             // reset state vars
             setWalletModalVisible(false);
             setShowOtp(false);
-            setShowEmailVerification(false);
-            setEmailText("");
-            setActiveStep(4);
           } else {
             helperToast.error("Error updating email.");
           }
         };
 
         updateEmail();
+
+        // reset email vars
+        setShowEmailVerification(false);
+        setEmailText("");
+        setUserEnteredOtp("");
+        setActiveStep(1);
       } else {
         helperToast.error("OTP entered is incorrect.");
       }
+    } else {
+      return;
     }
   }, [userEnteredOtp, generatedOtp, account, emailText]);
 
@@ -565,6 +570,7 @@ function FullApp() {
             disconnectAccountAndCloseSettings={disconnectAccountAndCloseSettings}
             openSettings={openSettings}
             setWalletModalVisible={setWalletModalVisible}
+            setApprovalsModalVisible={setApprovalsModalVisible}
             setDoesUserHaveEmail={setDoesUserHaveEmail}
             redirectPopupTimestamp={redirectPopupTimestamp}
             showRedirectModal={showRedirectModal}
