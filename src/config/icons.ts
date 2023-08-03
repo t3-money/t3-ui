@@ -19,6 +19,7 @@ import gmxArbitrum from "img/ic_gmx_arbitrum.svg";
 import gmxAvax from "img/ic_gmx_avax.svg";
 import glpArbitrum from "img/ic_glp_arbitrum.svg";
 import glpAvax from "img/ic_glp_avax.svg";
+import optimismIcn from "img/icn_opt_24.svg"
 
 const ICONS = {
   [ARBITRUM]: {
@@ -42,8 +43,7 @@ const ICONS = {
     glp: tlpIcon,
   },
   [OPTIMISM_GOERLI_TESTNET]: {
-    // @todo need new icon
-    network: sepoliaTesnet,
+    network: optimismIcn,
     glp: tlpIcon,
   },
   common: {
