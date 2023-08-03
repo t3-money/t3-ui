@@ -144,7 +144,7 @@ function FaucetDropdown() {
       </Menu.Button>
       <div>
         <>
-          <Menu.Items as="div" className="menu-itemss">
+          <Menu.Items as="div" className="menu">
             {tokens?.map((token) => (
               <>
                 {!token.isNative && (
