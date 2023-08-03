@@ -69,7 +69,7 @@ export function AppHeaderUser({
 
         if (user) {
           // User exists, check if email_address is present
-          if (user.email_address && user.email_address !== "") {
+          if (user?.email_address) {
             setDoesUserHaveEmail(true);
           }
         } else {

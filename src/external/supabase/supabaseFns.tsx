@@ -37,7 +37,7 @@ export const updateUserEmail = async (walletAddress: string, email: string) => {
   }
 
   // If no existing email, update the record
-  if (users && (!users.email_address || users.email_address.trim() === "")) {
+  if (!users?.email_address?.trim()) {
     const { error: updateError } = await supabase
       .from("users")
       .update({ email_address: email })
