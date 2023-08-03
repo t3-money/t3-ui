@@ -504,6 +504,14 @@ export const TOKENS: { [chainId: number]: Token[] } = {
       isStable: true,
       imageUrl: "https://assets.coingecko.com/coins/images/325/small/Tether.png?1668148663",
     },
+    {
+      name: "Bitcoin (WBTC)",
+      symbol: "BTC",
+      decimals: 8,
+      address: "0x56dF6457df2eE61fe6AC040d04F73E5a8D68b398",
+      isShortable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/7598/thumb/wrapped_bitcoin_wbtc.png?1548822744",
+    },
   ],
 };
 
