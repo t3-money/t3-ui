@@ -112,6 +112,7 @@ import OtpInput from "components/OtpInput/OtpInput";
 import { createOtp } from "config/tool";
 import sendOtp from "external/sendOtp";
 import { updateUserEmail } from "external/supabase/supabaseFns";
+import { ThemeContext } from "../contexts/theme-context";
 
 if (window?.ethereum?.autoRefreshOnNetworkChange) {
   window.ethereum.autoRefreshOnNetworkChange = false;
@@ -899,23 +900,37 @@ function FullApp() {
 }
 
 function App() {
+  const isBrowserDefaulDark = () => window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const getDefaultTheme = () => {
+    const localStorageTheme = localStorage.getItem("default-theme");
+    const browserDefault = isBrowserDefaulDark() ? "dark" : "light";
+    return localStorageTheme || browserDefault;
+  };
+
+  const [theme, setTheme] = useState(getDefaultTheme());
+
   useScrollToTop();
   useEffect(() => {
     const defaultLanguage = localStorage.getItem(LANGUAGE_LOCALSTORAGE_KEY) || defaultLocale;
     dynamicActivate(defaultLanguage);
   }, []);
   return (
-    <SWRConfig value={{ refreshInterval: 5000 }}>
-      <Web3ReactProvider getLibrary={getLibrary}>
-        <SEO>
-          <Router>
-            <I18nProvider i18n={i18n}>
-              <FullApp />
-            </I18nProvider>
-          </Router>
-        </SEO>
-      </Web3ReactProvider>
-    </SWRConfig>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <div className={`theme-${theme}`}>
+        <SWRConfig value={{ refreshInterval: 5000 }}>
+          <Web3ReactProvider getLibrary={getLibrary}>
+            <SEO>
+              <Router>
+                <I18nProvider i18n={i18n}>
+                  <FullApp />
+                </I18nProvider>
+              </Router>
+            </SEO>
+          </Web3ReactProvider>
+        </SWRConfig>
+      </div>
+    </ThemeContext.Provider>
   );
 }
 

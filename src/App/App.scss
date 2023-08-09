@@ -19,18 +19,6 @@
   z-index: 800;
 }
 
-.App-header.large {
-  height: 6.2rem;
-  backdrop-filter: blur(4px);
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  padding-left: 3.2rem;
-  padding-right: 3.2rem;
-  background: transparent 0% 0% no-repeat padding-box;
-  border-bottom: 1px solid #ffffff10;
-}
-
 .App-header.large::after {
   height: 1.3rem;
   width: 100%;
@@ -318,18 +306,16 @@
 }
 
 .Wallets-container {
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2px;
   width: 90%;
 }
-
-
 .Wallet-btn {
   display: block;
   box-shadow: inset 0px 0px 1rem 0.5rem rgba(27, 30, 46, 0.2);
-  background: rgba(45, 45, 45, 0.50);
+  background: rgba(45, 45, 45, 0.5);
   height: 5.1rem;
   width: 90%;
   border: 1px solid var(--dark-blue-border);
@@ -1471,7 +1457,7 @@ button.App-button {
 }
 
 .Email-input-prompt-text {
-  text-align:left;
+  text-align: left;
   font-size: 15px;
 }
 
@@ -1495,9 +1481,7 @@ button.App-button {
   flex-grow: 1; /* Allow the input to take up the remaining space */
 }
 
-
 .Email-input-container {
-    padding-bottom: 5px;
-    width: 80%;
-
+  padding-bottom: 5px;
+  width: 80%;
 }

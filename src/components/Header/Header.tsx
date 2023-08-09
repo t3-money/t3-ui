@@ -1,4 +1,5 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState, useContext } from "react";
+import { ThemeContext } from "../../contexts/theme-context";
 import cx from "classnames";
 
 import { AppHeaderUser } from "./AppHeaderUser";
@@ -10,7 +11,7 @@ import { RiMenuLine } from "react-icons/ri";
 import { FaTimes } from "react-icons/fa";
 import { AnimatePresence as FramerAnimatePresence, motion } from "framer-motion";
 
-import "./Header.css";
+import "./Header.scss";
 import { Link } from "react-router-dom";
 import { isHomeSite } from "lib/legacy";
 import { HomeHeaderLinks } from "./HomeHeaderLinks";
@@ -51,6 +52,13 @@ export function Header({
 }: Props) {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [isNativeSelectorModalVisible, setIsNativeSelectorModalVisible] = useState(false);
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const handleThemeChange = () => {
+    const isCurrentDark = theme === "dark";
+    setTheme(isCurrentDark ? "light" : "dark");
+    localStorage.setItem("default-theme", isCurrentDark ? "light" : "dark");
+  };
 
   useEffect(() => {
     if (isDrawerVisible) {
@@ -119,6 +127,18 @@ export function Header({
               redirectPopupTimestamp={redirectPopupTimestamp}
               showRedirectModal={showRedirectModal}
             />
+            <div className="toggle-btn-section">
+              <div className={`toggle-checkbox m-vertical-auto`}>
+                <input
+                  className="toggle-btn__input"
+                  type="checkbox"
+                  name="checkbox"
+                  onChange={handleThemeChange}
+                  checked={theme === "light"}
+                />
+                <button type="button" className={`toggle-btn__input-label`} onClick={handleThemeChange}></button>
+              </div>
+            </div>
           </div>
         </div>
         <div className={cx("App-header", "small", { active: isDrawerVisible })}>

@@ -5,7 +5,7 @@ import React, { useCallback, useEffect } from "react";
 import { HeaderLink } from "./HeaderLink";
 import connectWalletImg from "img/ic_wallet_24.svg";
 
-import "./Header.css";
+import "./Header.scss";
 import { isHomeSite, getAccountUrl } from "lib/legacy";
 import cx from "classnames";
 import { Trans } from "@lingui/macro";
