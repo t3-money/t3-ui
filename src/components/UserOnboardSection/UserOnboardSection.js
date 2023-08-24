@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Trans } from "@lingui/macro";
 import StepIndicator from "../StepIndicator/StepIndicator";
-import "./UserOnboardSection.css";
+import "./UserOnboardSection.scss";
 import arrowIcn from "img/arrow_icn.svg";
 import stepDone from "img/icn_stepdone.svg";
 

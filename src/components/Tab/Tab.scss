@@ -1,11 +1,14 @@
+@import "../../styles/theme-variables.scss";
 .Tab.block {
   display: grid;
   grid-auto-flow: column;
   font-size: var(--font-sm);
   border-radius: 3px;
   overflow: hidden;
-  color: rgba(255, 255, 255, 0.7);
-  background: linear-gradient(90deg, rgba(30, 34, 61, 0.9) 0%, rgba(38, 43, 71, 0.9) 100%);
+  @include themify($themes) {
+    background: themed("Tab-block");
+    color: themed("Tab-block-color");
+  }
   box-shadow: inset 0px 0px 30px 5px rgba(255, 255, 255, 0.01);
 }
 
@@ -30,8 +33,10 @@
 .Tab.block .Tab-option.active {
   opacity: 1;
   pointer-events: none;
-  background: linear-gradient(90deg, rgba(45, 66, 252, 1) 0%, rgba(46, 61, 205, 1) 100%);
-  color: rgba(255, 255, 255, 1);
+  @include themify($themes) {
+    background: themed("Tab-option-active");
+    color: themed("Tab-option-active-color");
+  }
 }
 
 .Tab.block .Tab-option.active .Tab-option-icon {

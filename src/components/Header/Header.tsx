@@ -6,6 +6,7 @@ import { AppHeaderUser } from "./AppHeaderUser";
 import { AppHeaderLinks } from "./AppHeaderLinks";
 
 import logoImg from "img/logo_t3.svg";
+import logoImgLite from "img/t3-logo-lite.svg";
 import logoSmallImg from "img/logo_t3_small.svg";
 import { RiMenuLine } from "react-icons/ri";
 import { FaTimes } from "react-icons/fa";
@@ -108,7 +109,12 @@ export function Header({
         <div className="App-header large">
           <div className="App-header-container-left">
             <Link className="App-header-link-main" to="/">
-              <img src={logoImg} className="big" alt="t3 Logo" />
+              {theme === "dark" ? (
+                <img src={logoImg} className="big" alt="t3 Logo" />
+              ) : (
+                <img src={logoImgLite} className="big" alt="t3 Logo" />
+              )}
+
               <img src={logoSmallImg} className="small" alt="t3 Logo" />
             </Link>
             {isHomeSite() ? (

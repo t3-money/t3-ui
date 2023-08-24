@@ -1,3 +1,4 @@
+@import "../../styles/theme-variables.scss";
 .Modal {
   position: fixed;
   z-index: 1001;
@@ -35,7 +36,10 @@
   max-width: 100%;
   max-height: 90vh;
   overflow: auto;
-  background: #141414;
+  @include themify($themes) {
+    background: themed("connect-modal-background");
+  }
+
   border-radius: 14px;
 }
 
@@ -83,6 +87,9 @@
   text-align: left;
   font-size: var(--font-md);
   line-height: 1;
+  @include themify($themes) {
+    color: themed("cardTextcolor");
+  }
 }
 
 .Modal-close-button {
@@ -94,6 +101,9 @@
   cursor: pointer;
   text-align: right;
   display: inline-block;
+  @include themify($themes) {
+    color: themed("cardTextcolor");
+  }
 }
 
 .Modal-close-icon:hover {

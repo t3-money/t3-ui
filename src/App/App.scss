@@ -1,8 +1,12 @@
+@import "../styles/theme-variables.scss";
 .App {
   position: relative;
   overflow: hidden;
   min-height: 100%;
   font-size: var(--font-base);
+  @include themify($themes) {
+    background-color: themed("appBackground");
+  }
 }
 
 .App-header-backdrop {
@@ -143,9 +147,12 @@
 .App-box-highlight,
 .App-box-solid {
   position: relative;
-  border: 1px solid #1e2136;
+  @include themify($themes) {
+    border: themed("cardBorder");
+    background: themed("appBoxCardBackground");
+    color: themed("cardTextcolor");
+  }
   border-radius: 0.4rem;
-  background: #16182e;
   font-size: var(--font-base);
 }
 
@@ -314,14 +321,17 @@
 }
 .Wallet-btn {
   display: block;
-  box-shadow: inset 0px 0px 1rem 0.5rem rgba(27, 30, 46, 0.2);
-  background: rgba(45, 45, 45, 0.5);
+
+  @include themify($themes) {
+    background: themed("Wallet-btn-approve");
+    color: themed("cardTextcolor");
+  }
+
   height: 5.1rem;
   width: 90%;
   border: 1px solid var(--dark-blue-border);
   border-radius: 8px;
   position: relative;
-  color: white;
   font-size: 2rem;
   display: grid;
   grid-template-columns: auto 1fr;
@@ -399,7 +409,9 @@ button.App-connect-wallet:hover {
 
 .App-card-divider {
   height: 1px;
-  background: #23263b;
+  @include themify($themes) {
+    background: themed("App-card-divider");
+  }
   margin: 1.05rem -1.5rem;
 }
 
@@ -487,7 +499,9 @@ button.App-connect-wallet:hover {
   color: #b7b7bd;
   line-height: 2.15rem;
   font-size: var(--font-base);
-  color: rgba(255, 255, 255, 0.71);
+  @include themify($themes) {
+    color: themed("cardTextcolor");
+  }
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
@@ -501,8 +515,11 @@ button.App-connect-wallet:hover {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: #1a1a1a;
+  @include themify($themes) {
+    background: themed("connect-modal-wrapper");
+  }
   border-radius: 8px;
+  border: 1px solid black;
 }
 
 .Page-description span,
@@ -555,7 +572,9 @@ button.App-connect-wallet:hover {
   line-height: 2.1rem;
   font-weight: normal;
   letter-spacing: 0px;
-  color: #ffffff;
+  @include themify($themes) {
+    color: themed("cardTextcolor");
+  }
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
@@ -1117,11 +1136,15 @@ button.App-button {
 }
 
 .App-slider .rc-slider-rail {
-  background: linear-gradient(90deg, rgba(30, 34, 61, 1) 0%, rgba(40, 45, 74, 1) 100%);
+  @include themify($themes) {
+    background: themed("rc-slider-rail");
+  }
 }
 
 .App-slider .rc-slider-track {
-  background: linear-gradient(90deg, rgba(46, 61, 205, 1) 0%, rgba(45, 66, 252, 1) 100%);
+  @include themify($themes) {
+    background: themed("rc-slider-track");
+  }
 }
 
 .App-slider .rc-slider-dot {
@@ -1129,16 +1152,22 @@ button.App-button {
   border-radius: 1px;
   width: 2px;
   margin-left: -1px;
-  background: rgba(40, 45, 74, 1);
+  @include themify($themes) {
+    background: themed("rc-slider-dot");
+  }
 }
 
 .App-slider .rc-slider-dot-active {
-  background: #3d51ff;
+  @include themify($themes) {
+    background: themed("rc-slider-dot-active");
+  }
 }
 
 .App-slider .rc-slider-handle {
-  background: #303652;
-  border: solid 2px rgba(45, 66, 252, 1);
+  @include themify($themes) {
+    background: themed("rc-slider-handle");
+    border: themed("rc-slider-handle-border");
+  }
 }
 
 .App-slider .rc-slider-handle:active {

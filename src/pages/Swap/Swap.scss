@@ -1,3 +1,4 @@
+@import "../../styles/theme-variables.scss";
 .Exchange {
   max-width: 155rem;
   margin: auto;
@@ -10,8 +11,10 @@
 
 .Exchange-trigger-order-info,
 .Exchange-trigger-order-info a {
-  color: rgba(255, 255, 255, 0.7);
-  border: 1px solid #23263b;
+  @include themify($themes) {
+    color: themed("Exchange-trigger-order-info");
+    border: themed("Exchange-trigger-order-info-border");
+  }
 }
 
 .Exchange-list-tab-container {
@@ -187,7 +190,7 @@
   right: 1.5rem;
   top: 1.5rem;
   bottom: 1.5rem;
-  mask-image: url(img/wave-01.png);
+  mask-image: url(../../img/wave-01.png);
   mask-size: 90% 90%;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -636,7 +639,9 @@ table.Exchange-list th {
   padding: 1.5rem;
   margin-bottom: 1.05rem;
   border-radius: 0.3rem;
-  background: linear-gradient(90deg, rgba(30, 34, 61, 0.9) 0%, rgba(38, 43, 71, 0.9) 100%);
+  @include themify($themes) {
+    background: themed("exchange-swap-section");
+  }
   box-shadow: inset 0px 0px 3rem 0.5rem rgba(255, 255, 255, 0.01);
 }
 
@@ -750,7 +755,9 @@ input.Exchange-swap-input.small {
   border-radius: 3.1rem;
   cursor: pointer;
   user-select: none;
-  background: linear-gradient(90deg, rgba(45, 66, 252, 1) 0%, rgba(46, 61, 205, 1) 100%);
+  @include themify($themes) {
+    background: themed("Exchange-swap-ball");
+  }
   display: flex;
   justify-content: center;
   align-items: center;

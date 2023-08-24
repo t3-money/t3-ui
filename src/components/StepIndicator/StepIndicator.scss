@@ -1,0 +1,13 @@
+@import "../../styles/theme-variables.scss";
+.Circular-digit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  @include themify($themes) {
+    border: themed("Circular-digit");
+  }
+  border-radius: 50%;
+  margin-right: 10px;
+}

@@ -85,7 +85,7 @@
   padding-right: 3.2rem;
   border-bottom: 1px solid #ffffff10;
   @include themify($themes) {
-    background: themed("headerFooterBackground");
+    background: themed("appBackground");
   }
 }
 
@@ -229,14 +229,18 @@
 .App-header .a:hover,
 .App-header a:hover {
   opacity: 1;
-  color: #eee;
+  @include themify($themes) {
+    color: themed("headerTextActive");
+  }
 }
 
 .App-header-container-left .a,
 .App-header-container-left a {
   padding: 1.8rem 1.7rem;
   display: block;
-  color: #a0a3c4;
+  @include themify($themes) {
+    color: themed("headerText");
+  }
   font-size: var(--font-base);
   line-height: 1.8rem;
   font-weight: normal;
@@ -244,7 +248,9 @@
 
 .App-header-container-left .a.active,
 .App-header-container-left a.active {
-  color: white;
+  @include themify($themes) {
+    color: themed("headerTextActive");
+  }
 }
 
 .App-header-container-right {

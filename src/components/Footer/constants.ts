@@ -1,5 +1,5 @@
 import { defineMessage } from "@lingui/macro";
-import "./Footer.css";
+import "./Footer.scss";
 import twitterIcon from "img/ic_twitter.svg";
 import discordIcon from "img/ic_discord.svg";
 import telegramIcon from "img/ic_telegram.svg";

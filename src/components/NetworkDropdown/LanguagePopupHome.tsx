@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import ModalWithPortal from "../Modal/ModalWithPortal";
 import { t } from "@lingui/macro";
 import cx from "classnames";
-import "./NetworkDropdown.css";
+import "./NetworkDropdown.scss";
 import language24Icon from "img/ic_language24.svg";
 import { isHomeSite } from "lib/legacy";
 import { defaultLocale } from "lib/i18n";

@@ -2,7 +2,7 @@ import { Menu } from "@headlessui/react";
 import { t, Trans } from "@lingui/macro";
 import { helperToast } from "lib/helperToast";
 import { FaChevronDown, FaParachuteBox } from "react-icons/fa";
-import "./FaucetDropdown.css";
+import "./FaucetDropdown.scss";
 import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { getExplorerUrl } from "config/chains";

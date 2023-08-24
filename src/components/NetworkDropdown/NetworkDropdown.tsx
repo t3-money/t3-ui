@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
+import { ThemeContext } from "../../contexts/theme-context";
 import { Menu } from "@headlessui/react";
 import ModalWithPortal from "../Modal/ModalWithPortal";
 import { t, Trans } from "@lingui/macro";
 import cx from "classnames";
 import { HiDotsVertical } from "react-icons/hi";
-import "./NetworkDropdown.css";
+import "./NetworkDropdown.scss";
 import language24Icon from "img/ic_language24.svg";
 import settingsIcon from "img/ic_settings_16.svg";
 // import clickTradingIcon from "img/icn_1clicktrading.svg";
@@ -87,6 +88,7 @@ export default function NetworkDropdown(props) {
 function NavIcons({ selectorLabel }) {
   const { chainId } = useChainId();
   const icon = getIcon(chainId, "network");
+  const { theme } = useContext(ThemeContext);
 
   return (
     <>
@@ -95,19 +97,13 @@ function NavIcons({ selectorLabel }) {
       </button>
       <div className="network-dropdown-seperator" />
       <button className="transparent">
-        <HiDotsVertical color="white" size={20} />
+        <HiDotsVertical color={theme === "dark" ? "white" : "black"} size={20} />
       </button>
     </>
   );
 }
 
-function DesktopDropdown({
-  setActiveModal,
-  selectorLabel,
-  networkOptions,
-  onNetworkSelect,
-  openSettings,
-}) {
+function DesktopDropdown({ setActiveModal, selectorLabel, networkOptions, onNetworkSelect, openSettings }) {
   return (
     <div className="App-header-network">
       <Menu>

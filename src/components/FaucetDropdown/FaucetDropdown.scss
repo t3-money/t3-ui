@@ -1,3 +1,4 @@
+@import "../../styles/theme-variables.scss";
 .menu:focus-visible {
   border: 1px solid #262638;
 }
@@ -5,7 +6,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #14f187 !important;
+  @include themify($themes) {
+    border: themed("cardBorder");
+    color: themed("default-btn") !important;
+  }
 }
 
 .faucet {
@@ -21,8 +25,10 @@
   width: 100%;
   transform-origin: top right;
   border-radius: 0.4rem;
-  background: #1e1e1e;
-  border: 1px solid #32344c;
+  @include themify($themes) {
+    background: themed("network-dropdown");
+    border: themed("cardBorder");
+  }
   list-style: none;
   cursor: pointer;
   outline: none;
@@ -39,7 +45,10 @@
   border-radius: 0.4rem;
 }
 .menu-item:hover {
-  background: #808aff14 !important;
+  @include themify($themes) {
+    background: themed("menu-item-hover") !important;
+    color: themed("menu-item-hover-text");
+  }
   border-radius: 0.4rem;
   opacity: 1;
   color: #eee;

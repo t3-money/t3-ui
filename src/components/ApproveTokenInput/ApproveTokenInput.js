@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./ApproveTokenInput.css";
+import "./ApproveTokenInput.scss";
 import { ethers } from "ethers";
 import { formatAmount } from "lib/numbers";
 import { approveTokens } from "domain/tokens";

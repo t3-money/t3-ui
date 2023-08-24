@@ -1,12 +1,16 @@
+@import "../../styles/theme-variables.scss";
 .App-header-network {
   position: relative;
   margin-left: 2.4rem;
-  border: 1px solid var(--dark-blue-border);
+  @include themify($themes) {
+    border: themed("connect-wallet-btn");
+    color: themed("cardTextcolor");
+  }
+
   border-radius: var(--border-radius-sm);
   height: 3.6rem;
   display: inline-flex;
   align-items: center;
-  color: white;
 }
 
 .App-header-language {

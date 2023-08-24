@@ -39,7 +39,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Modal from "components/Modal/Modal";
 import Checkbox from "components/Checkbox/Checkbox";
 
-import "styles/Shared.css";
+import "../styles/Shared.scss";
 import "styles/Font.css";
 import "./App.scss";
 import "styles/Input.css";

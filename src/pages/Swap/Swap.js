@@ -42,7 +42,7 @@ import ExchangeBanner from "components/Exchange/ExchangeBanner";
 import Tab from "components/Tab/Tab";
 import Footer from "components/Footer/Footer";
 
-import "./Swap.css";
+import "./Swap.scss";
 import { contractFetcher } from "lib/contracts";
 import { useInfoTokens } from "domain/tokens";
 import { useLocalStorageByChainId, useLocalStorageSerializeKey } from "lib/localStorage";

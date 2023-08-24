@@ -1,3 +1,4 @@
+@import "../styles/theme-variables.scss";
 html,
 body,
 #root {
@@ -5,9 +6,7 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
-  color: white;
   font-size: 10px;
-  background-color: #000000;
 }
 
 body {
@@ -187,7 +186,9 @@ td {
 
 .label,
 .label a {
-  color: rgba(255, 255, 255, 0.7);
+  @include themify($themes) {
+    color: themed("cardTextcolor");
+  }
 }
 
 ul {
@@ -208,7 +209,10 @@ a.plain {
 }
 
 .default-btn {
-  background: #14f187;
+  @include themify($themes) {
+    background: themed("default-btn");
+  }
+
   border-radius: 4px;
   font-size: var(--font-sm);
   line-height: 2rem;

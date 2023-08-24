@@ -2,7 +2,7 @@ import React from "react";
 
 import cx from "classnames";
 
-import "./Tab.css";
+import "./Tab.scss";
 
 export default function Tab(props) {
   const { options, option, setOption, onChange, type = "block", className, optionLabels, icons } = props;
