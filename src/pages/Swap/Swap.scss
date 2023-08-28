@@ -690,12 +690,14 @@ table.Exchange-list th {
   top: 0;
   padding: 0.465rem 0.8rem;
   color: #fff;
-  outline: 1rem solid rgba(33, 37, 64, 1);
+  outline: 1rem solid transparent;
   border-radius: 3px;
   z-index: 1;
   cursor: pointer;
   font-size: var(--font-sm);
-  background: linear-gradient(90deg, rgba(45, 66, 252, 1) 0%, rgba(46, 61, 205, 1) 100%);
+  @include themify($themes) {
+    background: themed("Exchange-swap-ball");
+  }
 }
 
 .Exchange-swap-max:hover {

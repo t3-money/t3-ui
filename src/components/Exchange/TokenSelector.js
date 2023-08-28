@@ -7,7 +7,7 @@ import Modal from "../Modal/Modal";
 
 import dropDownIcon from "img/DROP_DOWN.svg";
 import searchIcon from "img/search.svg";
-import "./TokenSelector.css";
+import "./TokenSelector.scss";
 import TooltipWithPortal from "../Tooltip/TooltipWithPortal";
 import { bigNumberify, expandDecimals, formatAmount } from "lib/numbers";
 import { getToken } from "config/tokens";
