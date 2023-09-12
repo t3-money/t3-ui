@@ -416,15 +416,6 @@ export const TOKENS: { [chainId: number]: Token[] } = {
       isShortable: true,
       imageUrl: "https://assets.coingecko.com/coins/images/7598/small/wrapped_bitcoin_wbtc.png?1548822744",
     },
-    // {
-    //   name: "Uniswap",
-    //   symbol: "UNI",
-    //   address: "0x3B88F3CD183Bf4340D2A6bEd26EcCa9C9613DA62",
-    //   decimals: 18,
-    //   isStable: false,
-    //   isShortable: true,
-    //   imageUrl: "https://assets.coingecko.com/coins/images/12504/small/uniswap-uni.png?1600306604",
-    // },
     {
       name: "Link",
       symbol: "LINK",
@@ -434,6 +425,15 @@ export const TOKENS: { [chainId: number]: Token[] } = {
       isShortable: true,
       imageUrl: "https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png?1547034700",
     },
+    // {
+    //   name: "Uniswap",
+    //   symbol: "UNI",
+    //   address: "0x3B88F3CD183Bf4340D2A6bEd26EcCa9C9613DA62",
+    //   decimals: 18,
+    //   isStable: false,
+    //   isShortable: true,
+    //   imageUrl: "https://assets.coingecko.com/coins/images/12504/small/uniswap-uni.png?1600306604",
+    // },
     {
       name: "USD Coin",
       symbol: "USDC",
