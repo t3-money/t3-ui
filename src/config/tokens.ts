@@ -383,6 +383,15 @@ export const TOKENS: { [chainId: number]: Token[] } = {
       imageUrl: "https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png?1547034700",
     },
     {
+      name: "USD Coin",
+      symbol: "USDC",
+      decimals: 18,
+      address: "0x36A4F86D8C85c42A7d2e5eb73D29E5AcBBe64186",
+      isStable: true,
+      coingeckoUrl: "https://www.coingecko.com/en/coins/usd-coin",
+      imageUrl: "https://assets.coingecko.com/coins/images/6319/small/USD_Coin_icon.png",
+    },
+    {
       name: "Ethereum",
       symbol: "ETH",
       decimals: 18,
@@ -432,15 +441,6 @@ export const TOKENS: { [chainId: number]: Token[] } = {
       decimals: 6,
       isStable: true,
       imageUrl: "https://assets.coingecko.com/coins/images/325/small/Tether.png?1668148663",
-    },
-    {
-      name: "USD Coin",
-      symbol: "USDC",
-      decimals: 18,
-      address: "0x36A4F86D8C85c42A7d2e5eb73D29E5AcBBe64186",
-      isStable: true,
-      coingeckoUrl: "https://www.coingecko.com/en/coins/usd-coin",
-      imageUrl: "https://assets.coingecko.com/coins/images/6319/small/USD_Coin_icon.png",
     },
   ],
   [OPTIMISM_GOERLI_TESTNET]: [
