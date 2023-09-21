@@ -347,11 +347,11 @@ export default function DashboardV2() {
                 </div>
               )}
               <br />
-              <div>
+              {/* <div>
                 <ExternalLink href="https://gmxio.gitbook.io/gmx/glp">
                   <Trans>More Info</Trans>
                 </ExternalLink>
-              </div>
+              </div> */}
             </>
           );
         }}
@@ -471,7 +471,7 @@ export default function DashboardV2() {
             <div className="Page-title">
               <Trans>Stats</Trans> <img width="24" src={currentIcons.network} alt="Network Icon" />
             </div>
-            <div className="Page-description">
+            {/* <div className="Page-description">
               <Trans>
                 {chainName} Total Stats start from {totalStatsStartDate}.<br /> For detailed stats:
               </Trans>{" "}
@@ -480,7 +480,7 @@ export default function DashboardV2() {
                 <ExternalLink href="https://stats.gmx.io/avalanche">https://stats.gmx.io/avalanche</ExternalLink>
               )}
               .
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="DashboardV2-content">
@@ -500,7 +500,7 @@ export default function DashboardV2() {
                       handle={`$${formatAmount(tvl, USD_DECIMALS, 0, true)}`}
                       position="right-bottom"
                       renderContent={() => (
-                        <span>{t`Assets Under Management: GMX staked (All chains) + GLP pool (${chainName}).`}</span>
+                        <span>{t`Assets Under Management: TMX staked (All chains) + GLP pool (${chainName}).`}</span>
                       )}
                     />
                   </div>
@@ -692,8 +692,8 @@ export default function DashboardV2() {
                         <img src={currentIcons.gmx} width="40" alt="GMX Token Icon" />
                       </div>
                       <div className="App-card-title-mark-info">
-                        <div className="App-card-title-mark-title">GMX</div>
-                        <div className="App-card-title-mark-subtitle">GMX</div>
+                        <div className="App-card-title-mark-title">TMX</div>
+                        <div className="App-card-title-mark-subtitle">TMX</div>
                       </div>
                       <div>
                         <AssetDropdown assetSymbol="GMX" />
@@ -735,7 +735,7 @@ export default function DashboardV2() {
                       <div className="label">
                         <Trans>Supply</Trans>
                       </div>
-                      <div>{formatAmount(totalGmxSupply, GMX_DECIMALS, 0, true)} GMX</div>
+                      <div>{formatAmount(totalGmxSupply, GMX_DECIMALS, 0, true)} TMX</div>
                     </div>
                     <div className="App-card-row">
                       <div className="label">
