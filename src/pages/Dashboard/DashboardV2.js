@@ -31,7 +31,7 @@ import Footer from "components/Footer/Footer";
 import "./DashboardV2.css";
 
 import AssetDropdown from "./AssetDropdown";
-import ExternalLink from "components/ExternalLink/ExternalLink";
+// import ExternalLink from "components/ExternalLink/ExternalLink";
 import SEO from "components/Common/SEO";
 import { useTotalVolume, useVolumeInfo, useFeesSummary } from "domain/stats";
 import StatsTooltip from "components/StatsTooltip/StatsTooltip";
@@ -391,7 +391,7 @@ export default function DashboardV2() {
     },
   ];
 
-  const totalStatsStartDate = chainId === AVALANCHE ? t`06 Jan 2022` : t`01 Sep 2021`;
+  // const totalStatsStartDate = chainId === AVALANCHE ? t`06 Jan 2022` : t`01 Sep 2021`;
 
   let stableGlp = 0;
   let totalGlp = 0;
