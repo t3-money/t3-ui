@@ -322,7 +322,7 @@ export default function DashboardV2() {
                     <br />
                     Get lower fees to{" "}
                     <Link to="/buy_glp" target="_blank" rel="noopener noreferrer">
-                      buy GLP
+                      buy TLP
                     </Link>{" "}
                     with {tokenInfo.symbol}, and to{" "}
                     <Link to="/trade" target="_blank" rel="noopener noreferrer">
@@ -500,14 +500,14 @@ export default function DashboardV2() {
                       handle={`$${formatAmount(tvl, USD_DECIMALS, 0, true)}`}
                       position="right-bottom"
                       renderContent={() => (
-                        <span>{t`Assets Under Management: TMX staked (All chains) + GLP pool (${chainName}).`}</span>
+                        <span>{t`Assets Under Management: TMX staked (All chains) + TLP pool (${chainName}).`}</span>
                       )}
                     />
                   </div>
                 </div>
                 <div className="App-card-row">
                   <div className="label">
-                    <Trans>GLP Pool</Trans>
+                    <Trans>TLP Pool</Trans>
                   </div>
                   <div>
                     <TooltipComponent
@@ -515,9 +515,9 @@ export default function DashboardV2() {
                       position="right-bottom"
                       renderContent={() => (
                         <Trans>
-                          <p>Total value of tokens in GLP pool ({chainName}).</p>
+                          <p>Total value of tokens in TLP pool ({chainName}).</p>
                           <p>
-                            Other websites may show a higher value as they add positions' collaterals to the GLP pool.
+                            Other websites may show a higher value as they add positions' collaterals to the TLP pool.
                           </p>
                         </Trans>
                       )}
@@ -679,7 +679,7 @@ export default function DashboardV2() {
               <Trans>Tokens</Trans> <img src={currentIcons.network} width="24" alt="Network Icon" />
             </div>
             <div className="Page-description">
-              <Trans>Platform and GLP index tokens.</Trans>
+              <Trans>Platform and TLP index tokens.</Trans>
             </div>
           </div>
           <div className="DashboardV2-token-cards">
@@ -817,8 +817,8 @@ export default function DashboardV2() {
                         <img src={currentIcons.glp} width="40" alt="GLP Icon" />
                       </div>
                       <div className="App-card-title-mark-info">
-                        <div className="App-card-title-mark-title">GLP</div>
-                        <div className="App-card-title-mark-subtitle">GLP</div>
+                        <div className="App-card-title-mark-title">TLP</div>
+                        <div className="App-card-title-mark-subtitle">TLP</div>
                       </div>
                       <div>
                         <AssetDropdown assetSymbol="GLP" />
@@ -837,7 +837,7 @@ export default function DashboardV2() {
                       <div className="label">
                         <Trans>Supply</Trans>
                       </div>
-                      <div>{formatAmount(glpSupply, GLP_DECIMALS, 0, true)} GLP</div>
+                      <div>{formatAmount(glpSupply, GLP_DECIMALS, 0, true)} TLP</div>
                     </div>
                     <div className="App-card-row">
                       <div className="label">
@@ -894,7 +894,7 @@ export default function DashboardV2() {
                         ))}
                       </Pie>
                       <text x={"50%"} y={"50%"} fill="white" textAnchor="middle" dominantBaseline="middle">
-                        GLP Pool
+                        TLP Pool
                       </text>
                       <Tooltip content={<CustomTooltip />} />
                     </PieChart>
@@ -904,7 +904,7 @@ export default function DashboardV2() {
             </div>
             <div className="token-table-wrapper App-card">
               <div className="App-card-title">
-                <Trans>GLP Index Composition</Trans> <img src={currentIcons.network} width="16" alt="Network Icon" />
+                <Trans>TLP Index Composition</Trans> <img src={currentIcons.network} width="16" alt="Network Icon" />
               </div>
               <div className="App-card-divider"></div>
               <table className="token-table">
