@@ -1161,6 +1161,7 @@ export default function StakeV2({ setPendingTxns, connectWallet }) {
 
   let totalSupplyUsd;
   if (totalGmxSupply && !totalGmxSupply.isZero() && gmxPrice) {
+    // eslint-disable-next-line no-unused-vars
     totalSupplyUsd = totalGmxSupply.mul(gmxPrice).div(expandDecimals(1, 18));
   }
 
