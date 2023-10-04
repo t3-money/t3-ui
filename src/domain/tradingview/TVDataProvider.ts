@@ -54,8 +54,8 @@ export class TVDataProvider {
     const barsInfo = this.barsInfo;
     if (!barsInfo.data.length || barsInfo.ticker !== ticker || barsInfo.period !== period || shouldRefetchBars) {
       try {
-        const bars = await this.getTokenChartPrice(chainId, ticker, period);
-        const filledBars = fillBarGaps(bars, CHART_PERIODS[period]);
+        const filledBars = await this.getTokenChartPrice(chainId, ticker, period);
+        //const filledBars = fillBarGaps(bars, CHART_PERIODS[period]); //todo
         const currentCandleTime = getCurrentCandleTime(period);
         const lastCandleTime = currentCandleTime - CHART_PERIODS[period];
         const lastBar = filledBars[filledBars.length - 1];
@@ -124,6 +124,7 @@ export class TVDataProvider {
       this.lastPeriod !== period
     ) {
       const prices = await this.getTokenLastBars(chainId, ticker, period, 1);
+      
       if (prices?.length) {
         // @ts-ignore
         const lastBar = prices[0];
