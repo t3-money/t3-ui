@@ -9,7 +9,6 @@ import { chainlinkClient } from "lib/subgraph/clients";
 import { sleep } from "lib/sleep";
 import { formatAmount } from "lib/numbers";
 import { getNativeToken, getNormalizedTokenSymbol, isChartAvailabeForToken } from "config/tokens";
-import { ARBITRUM } from "config/chains";
 
 const BigNumber = ethers.BigNumber;
 
@@ -28,16 +27,16 @@ const FEED_ID_MAP = {
 };
 export const timezoneOffset = -new Date().getTimezoneOffset() * 60;
 
-function formatBarInfo(bar) {
-  const { t, o: open, c: close, h: high, l: low } = bar;
-  return {
-    time: t + timezoneOffset,
-    open,
-    close,
-    high,
-    low,
-  };
-}
+// function formatBarInfo(bar) {
+//   const { t, o: open, c: close, h: high, l: low } = bar;
+//   return {
+//     time: t + timezoneOffset,
+//     open,
+//     close,
+//     high,
+//     low,
+//   };
+// }
 
 export function fillGaps(prices, periodSeconds) {
   if (prices.length < 2) {
@@ -150,8 +149,8 @@ export async function getChartPricesFromStats(chainId, symbol, period) {
   //   throw new Error(`not enough prices data: ${prices?.length}`);
   // }
 
-  const OBSOLETE_THRESHOLD = Date.now() / 1000 - 60 * 30; // 30 min ago
- const updatedAt = json?.updatedAt || 0;
+//   const OBSOLETE_THRESHOLD = Date.now() / 1000 - 60 * 30; // 30 min ago
+//  const updatedAt = json?.updatedAt || 0;
   // if (updatedAt < OBSOLETE_THRESHOLD) {
   //   throw new Error(
   //     "chart data is obsolete, last price record at " +
