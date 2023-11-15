@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import useSWR, { SWRConfig } from "swr";
 import { ethers } from "ethers";
 import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 import useScrollToTop from "lib/useScrollToTop";
+import Tour from "reactour";
 
 import { Switch, Route, HashRouter as Router, useLocation, useHistory } from "react-router-dom";
 
@@ -302,7 +304,7 @@ function FullApp() {
   const [shouldDisableValidationForTesting, setShouldDisableValidationForTesting] = useState(false);
   const [showPnlAfterFees, setShowPnlAfterFees] = useState(true);
   const [emailText, setEmailText] = useState("");
-  const [checkedTos, setCheckedTos] = useState(false);
+  // const [checkedTos, setCheckedTos] = useState(false); // @todo
 
   const [savedIsPnlInLeverage, setSavedIsPnlInLeverage] = useLocalStorageSerializeKey(
     [chainId, IS_PNL_IN_LEVERAGE_KEY],
@@ -563,9 +565,9 @@ function FullApp() {
     };
   }, [active, chainId, vaultAddress, positionRouterAddress]);
 
-  const handleTosChange = () => {
-    setCheckedTos(!checkedTos);
-  };
+  // const handleTosChange = () => {
+  //   setCheckedTos(!checkedTos);
+  // }; // @todo
 
   return (
     <>
@@ -922,6 +924,114 @@ function App() {
     const defaultLanguage = localStorage.getItem(LANGUAGE_LOCALSTORAGE_KEY) || defaultLocale;
     dynamicActivate(defaultLanguage);
   }, []);
+  const [isTourOpen, setIsTourOpen] = useState(true);
+
+  const steps = [
+    {
+      selector: '[data-tour="step-1"]',
+      content: ({ goTo, inDOM }) => (
+        <div>
+          <div class="tour-title">Trade (Step 1/4)</div>
+          <br />
+          <div class="tour-content">Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+          <br />
+          <div class="tour-control">
+            <a href="#" onClick={() => setIsTourOpen(false)}>
+              Close
+            </a>
+            <button onClick={() => goTo(1)}>Next</button>
+          </div>
+        </div>
+      ),
+      position: "bottom",
+      style: {
+        backgroundColor: "#242424",
+        width: "312px",
+        height: "172px",
+        padding: "16px",
+        fontSize: "18px",
+      },
+    },
+    {
+      selector: '[data-tour="step-2"]',
+      content: ({ goTo, inDOM }) => (
+        <div>
+          <div class="tour-title">Earn (Step 2/4)</div>
+          <br />
+          <div class="tour-content">Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+          <br />
+          <div class="tour-control">
+            <a href="#" onClick={() => setIsTourOpen(false)}>
+              Close
+            </a>
+            <button onClick={() => goTo(2)}>Next</button>
+          </div>
+        </div>
+      ),
+      position: "bottom",
+      style: {
+        backgroundColor: "#242424",
+        width: "312px",
+        height: "172px",
+        padding: "16px",
+        fontSize: "18px",
+      },
+    },
+    {
+      selector: ".third-step",
+      content: ({ goTo, inDOM }) => (
+        <div>
+          <div class="tour-title">Settings (Step 3/4)</div>
+          <br />
+          <div class="tour-content">Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+          <br />
+          <div class="tour-control">
+            <a href="#" onClick={() => setIsTourOpen(false)}>
+              Close
+            </a>
+            <button onClick={() => goTo(3)}>Next</button>
+          </div>
+        </div>
+      ),
+      position: "bottom",
+      style: {
+        backgroundColor: "#242424",
+        width: "312px",
+        height: "172px",
+        padding: "16px",
+        fontSize: "18px",
+      },
+    },
+    {
+      selector: ".fourth-step",
+      title: "Email Notifications",
+      content: "Lorem Ipsum is simply dummy text of the printing and typesetting.",
+      // eslint-disable-next-line no-dupe-keys
+      content: ({ goTo, inDOM }) => (
+        <div>
+          <div class="tour-title">Email Notifications</div>
+          <br />
+          <div class="tour-content">Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+          <br />
+          <div class="tour-control">
+            <a href="#" onClick={() => setIsTourOpen(false)}>
+              Close
+            </a>
+            <button onClick={() => setIsTourOpen(false)}>Got it</button>
+          </div>
+        </div>
+      ),
+      position: "bottom",
+      style: {
+        backgroundColor: "#242424",
+        width: "312px",
+        height: "172px",
+        padding: "16px",
+        fontSize: "18px",
+      },
+    },
+    // ...
+  ];
   return (
     <SWRConfig value={{ refreshInterval: 5000 }}>
       <Web3ReactProvider getLibrary={getLibrary}>
@@ -929,6 +1039,15 @@ function App() {
           <Router>
             <I18nProvider i18n={i18n}>
               <FullApp />
+              <Tour
+                steps={steps}
+                isOpen={isTourOpen}
+                showCloseButton={false}
+                showNumber={false}
+                showNavigation={false}
+                showNavigationNumber={false}
+                showButtons={false}
+              />
             </I18nProvider>
           </Router>
         </SEO>
