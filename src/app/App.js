@@ -294,6 +294,7 @@ function FullApp() {
   const [doesUserHaveEmail, setDoesUserHaveEmail] = useState(false);
   const [activeStep, setActiveStep] = useState(1);
   const [activeModal, setActiveModal] = useState(null);
+  const [isChecked, setIsChecked] = useState(false);
 
   const connectWallet = () => setWalletModalVisible(true);
 
@@ -365,6 +366,11 @@ function FullApp() {
     setSavedShouldDisableValidationForTesting(shouldDisableValidationForTesting);
     setSavedSlippageAmount(basisPoints);
     setIsSettingsVisible(false);
+  };
+
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+    // set in local storage that user has accepted t&c
   };
 
   const handleEmailEntered = (email) => {
@@ -851,9 +857,11 @@ function FullApp() {
           isVisible={walletModalVisible}
           setIsVisible={setWalletModalVisible}
           label={`Connect Wallet`}
+          canClose={isChecked}
         >
+          {/* @todo t&c checkbox */}
           <div className="Wallet-modal-description">
-            <input id="tos" type="checkbox" />
+            <input id="tos" type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
             <label for="tos">
               I certify that I have read and accept the
               <br />

@@ -1,25 +1,27 @@
 import "./Modal.css";
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useRef, useEffect, useContext, useCallback } from "react";
 import cx from "classnames";
 import { motion, AnimatePresence } from "framer-motion";
 import { RemoveScroll } from "react-remove-scroll";
 import { MdClose } from "react-icons/md";
 import { ThemeContext } from "store/theme-provider";
+import { helperToast } from "lib/helperToast";
+import { Trans } from "@lingui/macro";
 
 export default function Modal(props) {
-  const { isVisible, setIsVisible, className, zIndex, onAfterOpen } = props;
+  const { isVisible, setIsVisible, className, zIndex, onAfterOpen, canClose } = props;
 
   const modalRef = useRef(null);
 
   useEffect(() => {
     function close(e) {
-      if (e.keyCode === 27 && setIsVisible) {
+      if (e.keyCode === 27 && setIsVisible && canClose) {
         setIsVisible(false);
       }
     }
     window.addEventListener("keydown", close);
     return () => window.removeEventListener("keydown", close);
-  }, [setIsVisible]);
+  }, [canClose, setIsVisible]);
 
   useEffect(() => {
     if (typeof onAfterOpen === "function") onAfterOpen();
@@ -30,9 +32,20 @@ export default function Modal(props) {
     visible: { opacity: 1 },
   };
 
-  const themeContext = useContext(ThemeContext);
+  const handleModalClose = useCallback(() => {
+    if(canClose) { 
+      setIsVisible(false); 
+    } else {
+      helperToast.error(
+        <div>
+          <Trans>Please accept the terms and conditions.</Trans>
+        </div>
+      );
+    }
+    
+  }, [canClose, setIsVisible]);
 
-  // console.log("modal ", themeContext.theme);
+  const themeContext = useContext(ThemeContext);
 
   return (
     <AnimatePresence>
@@ -59,7 +72,7 @@ export default function Modal(props) {
             <div className="Modal-header-wrapper">
               <div className="Modal-title-bar">
                 <div className="Modal-title">{props.label}</div>
-                <div className="Modal-close-button" onClick={() => setIsVisible(false)}>
+                <div className="Modal-close-button" onClick={handleModalClose}>
                   <MdClose fontSize={20} className="Modal-close-icon" />
                 </div>
               </div>
