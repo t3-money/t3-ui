@@ -4,7 +4,7 @@ import { supabase } from "./supabaseClient";
 
 export const addUser = async (walletAddress: string) => {
   //create referral code.
-  //const referralCode = generateReferralCode(10);
+  
   const { data, error } = await supabase
     .from("users")
     .insert([{ wallet_address: walletAddress, referral_code: "" }]);
@@ -16,20 +16,6 @@ export const addUser = async (walletAddress: string) => {
 
   return data;
 };
-
-// function generateReferralCode(length: number) {
-//   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-//   const code = crypto
-//     .randomBytes(Math.ceil(length / 2))
-//     .toString("hex")
-//     .toUpperCase()
-//     .split("")
-//     .filter((char) => characters.includes(char))
-//     .join("")
-//     .substring(0, length);
-
-//   return code;
-// }
 
 // Function to check if a user with a certain wallet exists
 export const getUserByWalletAddress = async (walletAddress: string) => {
