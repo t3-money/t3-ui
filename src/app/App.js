@@ -14,6 +14,8 @@ import {
   REFERRAL_CODE_QUERY_PARAM,
 } from "lib/legacy";
 
+import { registerUmamiScript } from "@parcellab/react-use-umami";
+
 import Home from "pages/Home/Home";
 import AppHome from "pages/AppHome/AppHome";
 import Dashboard from "pages/Dashboard/Dashboard";
@@ -901,6 +903,13 @@ function App() {
   useEffect(() => {
     const defaultLanguage = localStorage.getItem(LANGUAGE_LOCALSTORAGE_KEY) || defaultLocale;
     dynamicActivate(defaultLanguage);
+  }, []);
+  useEffect(() => {
+    registerUmamiScript(
+      "https://cloud.umami.is/script.js",
+      "ffcecef7-aa0a-4f0e-8b66-4a3b405493fe"
+      // ["t3.money"]
+    );
   }, []);
 
   return (

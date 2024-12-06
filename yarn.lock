@@ -5525,6 +5525,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@parcellab/react-use-umami@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@parcellab/react-use-umami@npm:2.0.1"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 5a76c2f5580224dfdcbf9eeed491da69f6b261602fe6e3830c4eba7e459d02663050706b0c092bd407ef90e34a053dd7d62734e93b26a31e36ddccedb6514239
+  languageName: node
+  linkType: hard
+
 "@pedrouid/environment@npm:^1.0.1":
   version: 1.0.1
   resolution: "@pedrouid/environment@npm:1.0.1"
@@ -14786,6 +14795,7 @@ __metadata:
     "@lingui/loader": 3.14.0
     "@lingui/macro": 3.13.3
     "@lingui/react": 3.13.3
+    "@parcellab/react-use-umami": ^2.0.1
     "@supabase/supabase-js": ^2.25.0
     "@testing-library/jest-dom": 5.16.1
     "@testing-library/react": 11.2.7
