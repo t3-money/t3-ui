@@ -43,6 +43,7 @@ import { useInfoTokens } from "domain/tokens";
 import { getTokenBySymbol, getWhitelistedTokens, GLP_POOL_COLORS } from "config/tokens";
 import { bigNumberify, expandDecimals, formatAmount, formatKeyAmount, numberWithCommas } from "lib/numbers";
 import { useDynamicChainId } from "lib/chains";
+import { MORPH_MAINNET } from "config/chains";
 import { formatDate } from "lib/dates";
 import { getIcons } from "config/icons";
 import { ThemeContext } from "store/theme-provider";
