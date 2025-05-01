@@ -154,13 +154,15 @@ export default function OrdersList(props) {
     return orders.map((order) => {
       if (order.type === SWAP) {
         const nativeTokenAddress = getContract(chainId, "NATIVE_TOKEN");
-        const fromTokenInfo = getTokenInfo(infoTokens, order.path[0], true, nativeTokenAddress);
+        // TODO - find out why ETH on Base is not being returned from getTokenInfo
+        const fromTokenInfo = getTokenInfo(infoTokens, order.path[0], true, nativeTokenAddress) || 'ETH';
+        // TODO - find out why ETH on Base is not being returned from getTokenInfo
         const toTokenInfo = getTokenInfo(
           infoTokens,
           order.path[order.path.length - 1],
           order.shouldUnwrap,
           nativeTokenAddress
-        );
+        ) || 'ETH';
 
         const markExchangeRate = getExchangeRate(fromTokenInfo, toTokenInfo);
         const orderId = `${order.type}-${order.index}`;
@@ -359,13 +361,15 @@ export default function OrdersList(props) {
     return orders.map((order) => {
       if (order.type === SWAP) {
         const nativeTokenAddress = getContract(chainId, "NATIVE_TOKEN");
-        const fromTokenInfo = getTokenInfo(infoTokens, order.path[0], true, nativeTokenAddress);
+        // TODO - find out why ETH on Base is not being returned from getTokenInfo
+        const fromTokenInfo = getTokenInfo(infoTokens, order.path[0], true, nativeTokenAddress) || 'ETH';
+        // TODO - find out why ETH on Base is not being returned from getTokenInfo
         const toTokenInfo = getTokenInfo(
           infoTokens,
           order.path[order.path.length - 1],
           order.shouldUnwrap,
           nativeTokenAddress
-        );
+        ) || 'ETH';
         const markExchangeRate = getExchangeRate(fromTokenInfo, toTokenInfo);
 
         return (

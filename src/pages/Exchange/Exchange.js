@@ -546,6 +546,7 @@ export const Exchange = forwardRef((props, ref) => {
   );
 
   const { infoTokens } = useInfoTokens(web3Provider, chainId, active, tokenBalances, fundingRateInfo);
+  console.log("infoTokens", infoTokens);
   const { minExecutionFee, minExecutionFeeUSD, minExecutionFeeErrorMessage } = useExecutionFee(
     web3Provider,
     active,
